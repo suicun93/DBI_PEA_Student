@@ -1,0 +1,11 @@
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.exe.config
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.exe
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.pdb
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csprojAssemblyReference.cache
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.Properties.Resources.resources
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.GenerateResource.cache
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.CoreCompileInputs.cache
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.exe
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.pdb
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.ClientForm.resources
+C:\Users\hoangduc\Desktop\Project\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.LoginForm.resources
