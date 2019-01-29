@@ -37,28 +37,32 @@
             this.studentLabel = new System.Windows.Forms.Label();
             this.paperNoLabel = new System.Windows.Forms.Label();
             this.downloadMaterialButton = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabBar = new System.Windows.Forms.TabControl();
             this.q1Tab = new System.Windows.Forms.TabPage();
+            this.q1RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q2Tab = new System.Windows.Forms.TabPage();
+            this.q2RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q3Tab = new System.Windows.Forms.TabPage();
+            this.q3RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q4Tab = new System.Windows.Forms.TabPage();
+            this.q4RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q5Tab = new System.Windows.Forms.TabPage();
+            this.q5RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q6Tab = new System.Windows.Forms.TabPage();
+            this.q6RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q7Tab = new System.Windows.Forms.TabPage();
+            this.q7RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q8Tab = new System.Windows.Forms.TabPage();
+            this.q8RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q9Tab = new System.Windows.Forms.TabPage();
+            this.q9RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q10Tab = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox5 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox6 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox7 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox8 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox9 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox10 = new System.Windows.Forms.RichTextBox();
-            this.tabControl1.SuspendLayout();
+            this.q10RichTextBox = new System.Windows.Forms.RichTextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.locationMaterialTextBox = new System.Windows.Forms.TextBox();
+            this.readyToFinishCheckBox = new System.Windows.Forms.CheckBox();
+            this.submitButton = new System.Windows.Forms.Button();
+            this.tabBar.SuspendLayout();
             this.q1Tab.SuspendLayout();
             this.q2Tab.SuspendLayout();
             this.q3Tab.SuspendLayout();
@@ -114,7 +118,7 @@
             // 
             // helpButton
             // 
-            this.helpButton.Location = new System.Drawing.Point(18, 396);
+            this.helpButton.Location = new System.Drawing.Point(18, 394);
             this.helpButton.Name = "helpButton";
             this.helpButton.Size = new System.Drawing.Size(75, 23);
             this.helpButton.TabIndex = 5;
@@ -129,9 +133,9 @@
             this.testNameLabel.ForeColor = System.Drawing.SystemColors.Highlight;
             this.testNameLabel.Location = new System.Drawing.Point(100, 51);
             this.testNameLabel.Name = "testNameLabel";
-            this.testNameLabel.Size = new System.Drawing.Size(86, 25);
+            this.testNameLabel.Size = new System.Drawing.Size(105, 25);
             this.testNameLabel.TabIndex = 6;
-            this.testNameLabel.Text = "Student:";
+            this.testNameLabel.Text = "Test name";
             this.testNameLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // studentLabel
@@ -141,9 +145,9 @@
             this.studentLabel.ForeColor = System.Drawing.SystemColors.Highlight;
             this.studentLabel.Location = new System.Drawing.Point(100, 84);
             this.studentLabel.Name = "studentLabel";
-            this.studentLabel.Size = new System.Drawing.Size(86, 25);
+            this.studentLabel.Size = new System.Drawing.Size(80, 25);
             this.studentLabel.TabIndex = 7;
-            this.studentLabel.Text = "Student:";
+            this.studentLabel.Text = "Student";
             this.studentLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // paperNoLabel
@@ -153,14 +157,14 @@
             this.paperNoLabel.ForeColor = System.Drawing.SystemColors.Highlight;
             this.paperNoLabel.Location = new System.Drawing.Point(497, 84);
             this.paperNoLabel.Name = "paperNoLabel";
-            this.paperNoLabel.Size = new System.Drawing.Size(86, 25);
+            this.paperNoLabel.Size = new System.Drawing.Size(94, 25);
             this.paperNoLabel.TabIndex = 8;
-            this.paperNoLabel.Text = "Student:";
+            this.paperNoLabel.Text = "Paper No";
             this.paperNoLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // downloadMaterialButton
             // 
-            this.downloadMaterialButton.Location = new System.Drawing.Point(18, 129);
+            this.downloadMaterialButton.Location = new System.Drawing.Point(18, 122);
             this.downloadMaterialButton.Name = "downloadMaterialButton";
             this.downloadMaterialButton.Size = new System.Drawing.Size(168, 23);
             this.downloadMaterialButton.TabIndex = 9;
@@ -168,212 +172,253 @@
             this.downloadMaterialButton.UseVisualStyleBackColor = true;
             this.downloadMaterialButton.Click += new System.EventHandler(this.downloadMaterialButton_Click);
             // 
-            // tabControl1
+            // tabBar
             // 
-            this.tabControl1.Controls.Add(this.q1Tab);
-            this.tabControl1.Controls.Add(this.q2Tab);
-            this.tabControl1.Controls.Add(this.q3Tab);
-            this.tabControl1.Controls.Add(this.q4Tab);
-            this.tabControl1.Controls.Add(this.q5Tab);
-            this.tabControl1.Controls.Add(this.q6Tab);
-            this.tabControl1.Controls.Add(this.q7Tab);
-            this.tabControl1.Controls.Add(this.q8Tab);
-            this.tabControl1.Controls.Add(this.q9Tab);
-            this.tabControl1.Controls.Add(this.q10Tab);
-            this.tabControl1.Location = new System.Drawing.Point(18, 159);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(750, 221);
-            this.tabControl1.TabIndex = 10;
+            this.tabBar.Controls.Add(this.q1Tab);
+            this.tabBar.Controls.Add(this.q2Tab);
+            this.tabBar.Controls.Add(this.q3Tab);
+            this.tabBar.Controls.Add(this.q4Tab);
+            this.tabBar.Controls.Add(this.q5Tab);
+            this.tabBar.Controls.Add(this.q6Tab);
+            this.tabBar.Controls.Add(this.q7Tab);
+            this.tabBar.Controls.Add(this.q8Tab);
+            this.tabBar.Controls.Add(this.q9Tab);
+            this.tabBar.Controls.Add(this.q10Tab);
+            this.tabBar.Location = new System.Drawing.Point(18, 163);
+            this.tabBar.Name = "tabBar";
+            this.tabBar.SelectedIndex = 0;
+            this.tabBar.Size = new System.Drawing.Size(750, 217);
+            this.tabBar.TabIndex = 10;
             // 
             // q1Tab
             // 
-            this.q1Tab.Controls.Add(this.richTextBox10);
+            this.q1Tab.Controls.Add(this.q1RichTextBox);
             this.q1Tab.Location = new System.Drawing.Point(4, 22);
             this.q1Tab.Name = "q1Tab";
             this.q1Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.q1Tab.Size = new System.Drawing.Size(742, 195);
+            this.q1Tab.Size = new System.Drawing.Size(742, 191);
             this.q1Tab.TabIndex = 0;
             this.q1Tab.Text = "Q1";
             this.q1Tab.UseVisualStyleBackColor = true;
             // 
+            // q1RichTextBox
+            // 
+            this.q1RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q1RichTextBox.Name = "q1RichTextBox";
+            this.q1RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q1RichTextBox.TabIndex = 1;
+            this.q1RichTextBox.Text = "";
+            // 
             // q2Tab
             // 
-            this.q2Tab.Controls.Add(this.richTextBox9);
+            this.q2Tab.Controls.Add(this.q2RichTextBox);
             this.q2Tab.Location = new System.Drawing.Point(4, 22);
             this.q2Tab.Name = "q2Tab";
             this.q2Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.q2Tab.Size = new System.Drawing.Size(742, 195);
+            this.q2Tab.Size = new System.Drawing.Size(742, 191);
             this.q2Tab.TabIndex = 1;
             this.q2Tab.Text = "Q2";
             this.q2Tab.UseVisualStyleBackColor = true;
             // 
+            // q2RichTextBox
+            // 
+            this.q2RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q2RichTextBox.Name = "q2RichTextBox";
+            this.q2RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q2RichTextBox.TabIndex = 1;
+            this.q2RichTextBox.Text = "";
+            // 
             // q3Tab
             // 
-            this.q3Tab.Controls.Add(this.richTextBox8);
+            this.q3Tab.Controls.Add(this.q3RichTextBox);
             this.q3Tab.Location = new System.Drawing.Point(4, 22);
             this.q3Tab.Name = "q3Tab";
-            this.q3Tab.Size = new System.Drawing.Size(742, 195);
+            this.q3Tab.Size = new System.Drawing.Size(742, 191);
             this.q3Tab.TabIndex = 2;
             this.q3Tab.Text = "Q3";
             this.q3Tab.UseVisualStyleBackColor = true;
             // 
+            // q3RichTextBox
+            // 
+            this.q3RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q3RichTextBox.Name = "q3RichTextBox";
+            this.q3RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q3RichTextBox.TabIndex = 1;
+            this.q3RichTextBox.Text = "";
+            // 
             // q4Tab
             // 
-            this.q4Tab.Controls.Add(this.richTextBox7);
+            this.q4Tab.Controls.Add(this.q4RichTextBox);
             this.q4Tab.Location = new System.Drawing.Point(4, 22);
             this.q4Tab.Name = "q4Tab";
-            this.q4Tab.Size = new System.Drawing.Size(742, 195);
+            this.q4Tab.Size = new System.Drawing.Size(742, 191);
             this.q4Tab.TabIndex = 3;
             this.q4Tab.Text = "Q4";
             this.q4Tab.UseVisualStyleBackColor = true;
             // 
+            // q4RichTextBox
+            // 
+            this.q4RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q4RichTextBox.Name = "q4RichTextBox";
+            this.q4RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q4RichTextBox.TabIndex = 1;
+            this.q4RichTextBox.Text = "";
+            // 
             // q5Tab
             // 
-            this.q5Tab.Controls.Add(this.richTextBox6);
+            this.q5Tab.Controls.Add(this.q5RichTextBox);
             this.q5Tab.Location = new System.Drawing.Point(4, 22);
             this.q5Tab.Name = "q5Tab";
-            this.q5Tab.Size = new System.Drawing.Size(742, 195);
+            this.q5Tab.Size = new System.Drawing.Size(742, 191);
             this.q5Tab.TabIndex = 4;
             this.q5Tab.Text = "Q5";
             this.q5Tab.UseVisualStyleBackColor = true;
             // 
+            // q5RichTextBox
+            // 
+            this.q5RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q5RichTextBox.Name = "q5RichTextBox";
+            this.q5RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q5RichTextBox.TabIndex = 1;
+            this.q5RichTextBox.Text = "";
+            // 
             // q6Tab
             // 
-            this.q6Tab.Controls.Add(this.richTextBox5);
+            this.q6Tab.Controls.Add(this.q6RichTextBox);
             this.q6Tab.Location = new System.Drawing.Point(4, 22);
             this.q6Tab.Name = "q6Tab";
-            this.q6Tab.Size = new System.Drawing.Size(742, 195);
+            this.q6Tab.Size = new System.Drawing.Size(742, 191);
             this.q6Tab.TabIndex = 5;
             this.q6Tab.Text = "Q6";
             this.q6Tab.UseVisualStyleBackColor = true;
             // 
+            // q6RichTextBox
+            // 
+            this.q6RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q6RichTextBox.Name = "q6RichTextBox";
+            this.q6RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q6RichTextBox.TabIndex = 1;
+            this.q6RichTextBox.Text = "";
+            // 
             // q7Tab
             // 
-            this.q7Tab.Controls.Add(this.richTextBox4);
+            this.q7Tab.Controls.Add(this.q7RichTextBox);
             this.q7Tab.Location = new System.Drawing.Point(4, 22);
             this.q7Tab.Name = "q7Tab";
-            this.q7Tab.Size = new System.Drawing.Size(742, 195);
+            this.q7Tab.Size = new System.Drawing.Size(742, 191);
             this.q7Tab.TabIndex = 6;
             this.q7Tab.Text = "Q7";
             this.q7Tab.UseVisualStyleBackColor = true;
             // 
+            // q7RichTextBox
+            // 
+            this.q7RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q7RichTextBox.Name = "q7RichTextBox";
+            this.q7RichTextBox.Size = new System.Drawing.Size(739, 195);
+            this.q7RichTextBox.TabIndex = 1;
+            this.q7RichTextBox.Text = "";
+            // 
             // q8Tab
             // 
-            this.q8Tab.Controls.Add(this.richTextBox3);
+            this.q8Tab.Controls.Add(this.q8RichTextBox);
             this.q8Tab.Location = new System.Drawing.Point(4, 22);
             this.q8Tab.Name = "q8Tab";
-            this.q8Tab.Size = new System.Drawing.Size(742, 195);
+            this.q8Tab.Size = new System.Drawing.Size(742, 191);
             this.q8Tab.TabIndex = 7;
             this.q8Tab.Text = "Q8";
             this.q8Tab.UseVisualStyleBackColor = true;
             // 
+            // q8RichTextBox
+            // 
+            this.q8RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q8RichTextBox.Name = "q8RichTextBox";
+            this.q8RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q8RichTextBox.TabIndex = 1;
+            this.q8RichTextBox.Text = "";
+            // 
             // q9Tab
             // 
-            this.q9Tab.Controls.Add(this.richTextBox2);
+            this.q9Tab.Controls.Add(this.q9RichTextBox);
             this.q9Tab.Location = new System.Drawing.Point(4, 22);
             this.q9Tab.Name = "q9Tab";
-            this.q9Tab.Size = new System.Drawing.Size(742, 195);
+            this.q9Tab.Size = new System.Drawing.Size(742, 191);
             this.q9Tab.TabIndex = 8;
             this.q9Tab.Text = "Q9";
             this.q9Tab.UseVisualStyleBackColor = true;
             // 
+            // q9RichTextBox
+            // 
+            this.q9RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q9RichTextBox.Name = "q9RichTextBox";
+            this.q9RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q9RichTextBox.TabIndex = 1;
+            this.q9RichTextBox.Text = "";
+            // 
             // q10Tab
             // 
-            this.q10Tab.Controls.Add(this.richTextBox1);
+            this.q10Tab.Controls.Add(this.q10RichTextBox);
             this.q10Tab.Location = new System.Drawing.Point(4, 22);
             this.q10Tab.Name = "q10Tab";
-            this.q10Tab.Size = new System.Drawing.Size(742, 195);
+            this.q10Tab.Size = new System.Drawing.Size(742, 191);
             this.q10Tab.TabIndex = 9;
             this.q10Tab.Text = "Q10";
             this.q10Tab.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // q10RichTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.q10RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q10RichTextBox.Name = "q10RichTextBox";
+            this.q10RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q10RichTextBox.TabIndex = 0;
+            this.q10RichTextBox.Text = "";
             // 
-            // richTextBox2
+            // label5
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox2.TabIndex = 1;
-            this.richTextBox2.Text = "";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(244, 127);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Save at:";
             // 
-            // richTextBox3
+            // locationMaterialTextBox
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox3.TabIndex = 1;
-            this.richTextBox3.Text = "";
+            this.locationMaterialTextBox.Enabled = false;
+            this.locationMaterialTextBox.Location = new System.Drawing.Point(307, 123);
+            this.locationMaterialTextBox.Name = "locationMaterialTextBox";
+            this.locationMaterialTextBox.Size = new System.Drawing.Size(457, 20);
+            this.locationMaterialTextBox.TabIndex = 12;
             // 
-            // richTextBox4
+            // readyToFinishCheckBox
             // 
-            this.richTextBox4.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(739, 195);
-            this.richTextBox4.TabIndex = 1;
-            this.richTextBox4.Text = "";
+            this.readyToFinishCheckBox.AutoSize = true;
+            this.readyToFinishCheckBox.Location = new System.Drawing.Point(459, 397);
+            this.readyToFinishCheckBox.Name = "readyToFinishCheckBox";
+            this.readyToFinishCheckBox.Size = new System.Drawing.Size(175, 17);
+            this.readyToFinishCheckBox.TabIndex = 13;
+            this.readyToFinishCheckBox.Text = "I really want to close PEA Client";
+            this.readyToFinishCheckBox.UseVisualStyleBackColor = true;
             // 
-            // richTextBox5
+            // submitButton
             // 
-            this.richTextBox5.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox5.Name = "richTextBox5";
-            this.richTextBox5.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox5.TabIndex = 1;
-            this.richTextBox5.Text = "";
-            // 
-            // richTextBox6
-            // 
-            this.richTextBox6.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox6.Name = "richTextBox6";
-            this.richTextBox6.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox6.TabIndex = 1;
-            this.richTextBox6.Text = "";
-            // 
-            // richTextBox7
-            // 
-            this.richTextBox7.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox7.Name = "richTextBox7";
-            this.richTextBox7.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox7.TabIndex = 1;
-            this.richTextBox7.Text = "";
-            // 
-            // richTextBox8
-            // 
-            this.richTextBox8.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox8.Name = "richTextBox8";
-            this.richTextBox8.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox8.TabIndex = 1;
-            this.richTextBox8.Text = "";
-            // 
-            // richTextBox9
-            // 
-            this.richTextBox9.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox9.Name = "richTextBox9";
-            this.richTextBox9.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox9.TabIndex = 1;
-            this.richTextBox9.Text = "";
-            // 
-            // richTextBox10
-            // 
-            this.richTextBox10.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox10.Name = "richTextBox10";
-            this.richTextBox10.Size = new System.Drawing.Size(742, 195);
-            this.richTextBox10.TabIndex = 1;
-            this.richTextBox10.Text = "";
+            this.submitButton.Location = new System.Drawing.Point(658, 394);
+            this.submitButton.Name = "submitButton";
+            this.submitButton.Size = new System.Drawing.Size(106, 23);
+            this.submitButton.TabIndex = 14;
+            this.submitButton.Text = "Submit";
+            this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 434);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.submitButton);
+            this.Controls.Add(this.readyToFinishCheckBox);
+            this.Controls.Add(this.locationMaterialTextBox);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.tabBar);
             this.Controls.Add(this.downloadMaterialButton);
             this.Controls.Add(this.paperNoLabel);
             this.Controls.Add(this.studentLabel);
@@ -386,7 +431,7 @@
             this.Name = "ClientForm";
             this.Text = "PEA Client Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientForm_FormClosing);
-            this.tabControl1.ResumeLayout(false);
+            this.tabBar.ResumeLayout(false);
             this.q1Tab.ResumeLayout(false);
             this.q2Tab.ResumeLayout(false);
             this.q3Tab.ResumeLayout(false);
@@ -408,12 +453,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button helpButton;
         private System.Windows.Forms.Label testNameLabel;
         private System.Windows.Forms.Label studentLabel;
         private System.Windows.Forms.Label paperNoLabel;
         private System.Windows.Forms.Button downloadMaterialButton;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabBar;
         private System.Windows.Forms.TabPage q1Tab;
         private System.Windows.Forms.TabPage q2Tab;
         private System.Windows.Forms.TabPage q3Tab;
@@ -424,15 +468,20 @@
         private System.Windows.Forms.TabPage q8Tab;
         private System.Windows.Forms.TabPage q9Tab;
         private System.Windows.Forms.TabPage q10Tab;
-        private System.Windows.Forms.RichTextBox richTextBox10;
-        private System.Windows.Forms.RichTextBox richTextBox9;
-        private System.Windows.Forms.RichTextBox richTextBox8;
-        private System.Windows.Forms.RichTextBox richTextBox7;
-        private System.Windows.Forms.RichTextBox richTextBox6;
-        private System.Windows.Forms.RichTextBox richTextBox5;
-        private System.Windows.Forms.RichTextBox richTextBox4;
-        private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox q1RichTextBox;
+        private System.Windows.Forms.RichTextBox q2RichTextBox;
+        private System.Windows.Forms.RichTextBox q3RichTextBox;
+        private System.Windows.Forms.RichTextBox q4RichTextBox;
+        private System.Windows.Forms.RichTextBox q5RichTextBox;
+        private System.Windows.Forms.RichTextBox q6RichTextBox;
+        private System.Windows.Forms.RichTextBox q7RichTextBox;
+        private System.Windows.Forms.RichTextBox q8RichTextBox;
+        private System.Windows.Forms.RichTextBox q9RichTextBox;
+        private System.Windows.Forms.RichTextBox q10RichTextBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox locationMaterialTextBox;
+        protected internal System.Windows.Forms.CheckBox readyToFinishCheckBox;
+        protected internal System.Windows.Forms.Button submitButton;
+        protected internal System.Windows.Forms.Button helpButton;
     }
 }
