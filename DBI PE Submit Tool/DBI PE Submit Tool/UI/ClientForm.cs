@@ -9,14 +9,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using DBI_PE_Submit_Tool.DAO;
 
 namespace DBI_PE_Submit_Tool
 {
     public partial class ClientForm : Form
     {
         // Information about student: studentID, paperNo, testName, urlDB to get material, listAnswer;
-        private string studentID, paperNo, testName, urlDB;
-        private List<RichTextBox> listAnswer = new List<RichTextBox>();
+        private string UrlDB;
+        private List<RichTextBox> ListAnswer = new List<RichTextBox>();
+        private Submition Submition = new Submition();
 
         public ClientForm(string TestName, string PaperNo, string StudentName)
         {
@@ -30,31 +32,31 @@ namespace DBI_PE_Submit_Tool
             {
                 // TODO: Call API to get question here!
                 // Now I mock up an url like 'https://www.w3schools.com/w3images/mac.jpg' to download
-                urlDB = "https://www.w3schools.com/w3images/mac.jpg";
-                studentLabel.Text = studentID = StudentName;
-                paperNoLabel.Text = paperNo = PaperNo;
-                testNameLabel.Text = testName = TestName;
-                setUpUI();
+                UrlDB = "https://www.w3schools.com/w3images/mac.jpg";
+                studentLabel.Text = this.Submition.StudentID = StudentName;
+                paperNoLabel.Text = this.Submition.PaperNo = PaperNo;
+                testNameLabel.Text = this.Submition.TestName = TestName;
+                SetUpUI();
             }
         }
 
-        private void setUpUI()
+        private void SetUpUI()
         {
             // Add all answer rich text box to list to add event draft answer on text change
-            listAnswer.Add(q1RichTextBox);
-            listAnswer.Add(q2RichTextBox);
-            listAnswer.Add(q3RichTextBox);
-            listAnswer.Add(q4RichTextBox);
-            listAnswer.Add(q5RichTextBox);
-            listAnswer.Add(q6RichTextBox);
-            listAnswer.Add(q7RichTextBox);
-            listAnswer.Add(q8RichTextBox);
-            listAnswer.Add(q9RichTextBox);
-            listAnswer.Add(q10RichTextBox);
+            ListAnswer.Add(q1RichTextBox);
+            ListAnswer.Add(q2RichTextBox);
+            ListAnswer.Add(q3RichTextBox);
+            ListAnswer.Add(q4RichTextBox);
+            ListAnswer.Add(q5RichTextBox);
+            ListAnswer.Add(q6RichTextBox);
+            ListAnswer.Add(q7RichTextBox);
+            ListAnswer.Add(q8RichTextBox);
+            ListAnswer.Add(q9RichTextBox);
+            ListAnswer.Add(q10RichTextBox);
             // Add event
-            for (int i = 0; i < listAnswer.Count; i++)
+            for (int i = 0; i < ListAnswer.Count; i++)
             {
-                listAnswer[i].TextChanged += new EventHandler(draftAnswers);
+                ListAnswer[i].TextChanged += new EventHandler(DraftAnswers);
             }
         }
 
@@ -65,13 +67,13 @@ namespace DBI_PE_Submit_Tool
         }
 
         // Help Button CLick
-        private void helpButton_Click(object sender, EventArgs e)
+        private void HelpButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Not supported yet");
         }
 
         // Download Material Button CLick
-        private void downloadMaterialButton_Click(object sender, EventArgs e)
+        private void DownloadMaterialButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -82,8 +84,8 @@ namespace DBI_PE_Submit_Tool
                 locationChooser.FilterIndex = 1;
                 if (locationChooser.ShowDialog() == DialogResult.OK)
                 {
-                    WebClient Client = new WebClient();
-                    Client.DownloadFile(urlDB, locationChooser.FileName);
+                    WebClient client = new WebClient();
+                    client.DownloadFile(UrlDB, locationChooser.FileName);
                     locationMaterialTextBox.Text = locationChooser.FileName;
                 }
             }
@@ -94,18 +96,14 @@ namespace DBI_PE_Submit_Tool
         }
 
         // Submit Button CLick
-        private void submitButton_Click(object sender, EventArgs e)
+        private void SubmitButton_Click(object sender, EventArgs e)
         {
             if (readyToFinishCheckBox.Checked)
             {
-                // Get all answer
-                List<string> answers = new List<string>();
-                foreach (RichTextBox richTextBox in listAnswer)
-                {
-                    answers.Add(richTextBox.Text);
-                }
+                SumUpAnswer();
                 // TODO: Call API to submit all answer, test name, studentID, paper number
-                MessageBox.Show(studentID + " have submitted something");
+                // CallAPIToSubmit()
+                MessageBox.Show(Submition.StudentID + " have submitted something");
             }
             else
             {
@@ -114,15 +112,22 @@ namespace DBI_PE_Submit_Tool
         }
 
         // Draft Student's answer every time they edit their answer
-        private void draftAnswers(object sender, System.EventArgs e)
+        private void DraftAnswers(object sender, System.EventArgs e)
         {
             // Get all answer
-            List<string> answers = new List<string>();
-            foreach (RichTextBox richTextBox in listAnswer)
-            {
-                answers.Add(richTextBox.Text);
-            }
+            SumUpAnswer();
             // TODO: Call API to draft all answer, test name, student's rollID, paper number
+            // CallAPIToDraft()
+        }
+
+        private void SumUpAnswer()
+        {
+            Submition.ClearAnswer();
+            foreach (RichTextBox richTextBox in ListAnswer)
+            {
+                Submition.AddAnswer(richTextBox.Text);
+            }
+            Submition.SaveToLocal();
         }
     }
 }

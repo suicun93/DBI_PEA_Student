@@ -124,7 +124,7 @@
             this.helpButton.TabIndex = 5;
             this.helpButton.Text = "Help";
             this.helpButton.UseVisualStyleBackColor = true;
-            this.helpButton.Click += new System.EventHandler(this.helpButton_Click);
+            this.helpButton.Click += new System.EventHandler(this.HelpButton_Click);
             // 
             // testNameLabel
             // 
@@ -170,7 +170,7 @@
             this.downloadMaterialButton.TabIndex = 9;
             this.downloadMaterialButton.Text = "Download Given Material ";
             this.downloadMaterialButton.UseVisualStyleBackColor = true;
-            this.downloadMaterialButton.Click += new System.EventHandler(this.downloadMaterialButton_Click);
+            this.downloadMaterialButton.Click += new System.EventHandler(this.DownloadMaterialButton_Click);
             // 
             // tabBar
             // 
@@ -407,7 +407,7 @@
             this.submitButton.TabIndex = 14;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
-            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
+            this.submitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
             // ClientForm
             // 
