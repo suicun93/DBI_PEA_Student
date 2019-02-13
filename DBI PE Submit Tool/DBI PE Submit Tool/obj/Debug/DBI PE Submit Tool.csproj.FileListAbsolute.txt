@@ -21,6 +21,5 @@ C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.exe
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.pdb
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.dll
-C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.pdb
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.xml
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.CopyComplete

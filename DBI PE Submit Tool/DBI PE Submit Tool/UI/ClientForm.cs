@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
-using System.IO;
 using DBI_PE_Submit_Tool.DAO;
+using DBI_PE_Submit_Tool.Common;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -18,8 +12,11 @@ namespace DBI_PE_Submit_Tool
         // Information about student: studentID, paperNo, testName, urlDB to get material, listAnswer;
         private string UrlDB;
         private List<RichTextBox> ListAnswer = new List<RichTextBox>();
-        private Submition Submition = new Submition();
-
+        private Submition submition = new Submition();
+        // Merge draft and submit to 1 method with a variable named "forDraft"
+        private bool forDraft = true, forSubmit = false; 
+        // Make student preview their answers before submitting
+        private bool previewed = false; 
         public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
 
         public ClientForm(string TestName, string PaperNo, string StudentName)
@@ -33,19 +30,19 @@ namespace DBI_PE_Submit_Tool
             else
             {
                 // TODO: Call API to get question here!
-                // Now I mock up an url like 'https://www.w3schools.com/w3images/mac.jpg' to download
+                // Now I mock up an url to download (an image from w3school)
                 UrlDBToDownload = "https://www.w3schools.com/w3images/mac.jpg";
-                studentLabel.Text = this.Submition.StudentID = StudentName;
-                paperNoLabel.Text = this.Submition.PaperNo = PaperNo;
-                testNameLabel.Text = this.Submition.TestName = TestName;
-                SetUpUI();
+                studentLabel.Text = this.submition.StudentID = StudentName;
+                paperNoLabel.Text = this.submition.PaperNo = PaperNo;
+                testNameLabel.Text = this.submition.TestName = TestName;
+                SetupUI();
             }
         }
 
         /// <summary>
         ///     Add all answer rich text box to list to add event draft answer on text change
         /// </summary>
-        private void SetUpUI()
+        private void SetupUI()
         {
             ListAnswer.Add(q1RichTextBox);
             ListAnswer.Add(q2RichTextBox);
@@ -57,113 +54,85 @@ namespace DBI_PE_Submit_Tool
             ListAnswer.Add(q8RichTextBox);
             ListAnswer.Add(q9RichTextBox);
             ListAnswer.Add(q10RichTextBox);
-            //// Add event to draft every time answers changed
-            //for (int i = 0; i < ListAnswer.Count; i++)
-            //{
-            //    ListAnswer[i].TextChanged += new EventHandler(DraftAnswers);
-            //}
+            // Add event to draft every time answers changed
+            for (int i = 0; i < ListAnswer.Count; i++)
+            {
+                ListAnswer[i].TextChanged += new EventHandler(DraftAnswers);
+            }
         }
 
-        /// <summary>
-        ///     Handle when user close window -> application will be closed. 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        /// <summary>
-        ///     Help Button CLick
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void HelpButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not supported yet");
+            MessageBox.Show("You should preview before submitting.");
         }
 
         /// <summary>
-        ///     Download Material Button CLick 
+        ///     Preview to re-check 10 answers
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        private void PreviewButton_Click(object sender, EventArgs e)
+        {
+            // List answers to preview
+            submition.Restore();
+            int i = 0;
+            string answers = "";
+            foreach (string answer in submition.ListAnswer)
+            {
+                i++;
+                answers += "Question " + i + "\n\t" + (String.IsNullOrEmpty(answer) ? "(empty)" : answer) + "\n";
+            }
+            MessageBox.Show(answers);
+            previewed = true;
+        }
+
         private void DownloadMaterialButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Open windown to choose the path
-                SaveFileDialog locationChooser = new SaveFileDialog();
-                locationChooser.FileName = "hi.jpg";  // This should be replaced by 'DB.rar' or something like that
-                locationChooser.InitialDirectory = Convert.ToString(Environment.SpecialFolder.DesktopDirectory); ;
-                locationChooser.FilterIndex = 1;
-                locationChooser.Filter = "zip files (*.rar,*.zip)|*.zip,*.rar|All files (*.*)|*.*";
-                if (locationChooser.ShowDialog() == DialogResult.OK)
-                {
-                    WebClient client = new WebClient();
-                    client.DownloadFile(UrlDBToDownload, locationChooser.FileName);
-                    locationMaterialTextBox.Text = locationChooser.FileName;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            Download.DownloadFrom(UrlDBToDownload, locationMaterialTextBox);
         }
 
-        /// <summary>
-        ///     Submit Button CLick 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (readyToFinishCheckBox.Checked)
-            {
-                SumUpAnswer(false);
-            }
+            if (!previewed)
+                MessageBox.Show("You should preview before submitting.");
             else
-            {
+                if (readyToFinishCheckBox.Checked)
+                SumUpAnswer(forSubmit);
+            else
                 MessageBox.Show("You have to confirmed to finish this exam.");
-            }
         }
 
         /// <summary>
-        ///     Draft Answers
+        ///     Draft Student's answer every time they edit their answer
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void draftButton_Click(object sender, EventArgs e)
+        private void DraftAnswers(object sender, System.EventArgs e)
         {
             // Get all answer
-            bool draft = true;
-            SumUpAnswer(draft);
+            SumUpAnswer(forDraft);
         }
 
         /// <summary>
         ///     Sum Up Answers and save to local
         /// </summary>
-        /// <param name="draft"> if draft -> call API to draft 
-        ///                      if submit -> call API to submit 
+        /// <param name="forDraft"> if draft -> call API to draft 
+        ///                         if submit -> call API to submit 
         /// </param>
-        private void SumUpAnswer(bool draft)
+        private void SumUpAnswer(bool forDraft)
         {
             // Change UI Draft Status UI 
             draftStatusLabel.Text = "Draft Status: N/A";
             draftStatusLabel.ForeColor = Color.Red;
             // Process
-            Submition.ClearAnswer();
+            previewed = false;
+            submition.ClearAnswer();
             foreach (RichTextBox richTextBox in ListAnswer)
             {
-                Submition.AddAnswer(richTextBox.Text);
+                submition.AddAnswer(richTextBox.Text);
             }
-            Submition.SaveToLocal();
-            if (draft)
+            submition.SaveToLocal();
+            if (forDraft)
             {
                 // TODO: Call API to draft all answer, test name, student's rollID, paper number
                 // CallAPIToDraft()
-                // Change UI Draft Status UI 
+                // Change UI Draft Status UI to draft success
                 draftStatusLabel.Text = "Draft Status: Success";
                 draftStatusLabel.ForeColor = Color.Green;
             }
@@ -171,24 +140,19 @@ namespace DBI_PE_Submit_Tool
             {
                 // TODO: Call API to submit all answer, test name, studentID, paper number
                 // CallAPIToSubmit()
-                // Change UI Draft Status UI 
+                // Change UI Draft Status UI to submit success
                 draftStatusLabel.Text = "Submit Status: Success";
                 draftStatusLabel.ForeColor = Color.Green;
-                MessageBox.Show(Submition.StudentID + " have submitted something");
+                MessageBox.Show(submition.StudentID + " have submitted something");
             }
-
         }
 
-        ///// <summary>
-        /////     Draft Student's answer every time they edit their answer
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void DraftAnswers(object sender, System.EventArgs e)
-        //{
-        //    // Get all answer
-        //    bool draft = true;
-        //    SumUpAnswer(draft);
-        //}
+        /// <summary>
+        ///     Handle when user close window -> application will be closed. 
+        /// </summary>
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
