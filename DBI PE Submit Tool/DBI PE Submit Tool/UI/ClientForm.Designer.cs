@@ -62,6 +62,8 @@
             this.locationMaterialTextBox = new System.Windows.Forms.TextBox();
             this.readyToFinishCheckBox = new System.Windows.Forms.CheckBox();
             this.submitButton = new System.Windows.Forms.Button();
+            this.draftButton = new System.Windows.Forms.Button();
+            this.draftStatusLabel = new System.Windows.Forms.Label();
             this.tabBar.SuspendLayout();
             this.q1Tab.SuspendLayout();
             this.q2Tab.SuspendLayout();
@@ -409,11 +411,34 @@
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
+            // draftButton
+            // 
+            this.draftButton.Location = new System.Drawing.Point(140, 394);
+            this.draftButton.Name = "draftButton";
+            this.draftButton.Size = new System.Drawing.Size(75, 23);
+            this.draftButton.TabIndex = 15;
+            this.draftButton.Text = "Draft";
+            this.draftButton.UseVisualStyleBackColor = true;
+            this.draftButton.Click += new System.EventHandler(this.draftButton_Click);
+            // 
+            // draftStatusLabel
+            // 
+            this.draftStatusLabel.AutoSize = true;
+            this.draftStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.draftStatusLabel.ForeColor = System.Drawing.Color.DarkRed;
+            this.draftStatusLabel.Location = new System.Drawing.Point(222, 398);
+            this.draftStatusLabel.Name = "draftStatusLabel";
+            this.draftStatusLabel.Size = new System.Drawing.Size(112, 15);
+            this.draftStatusLabel.TabIndex = 16;
+            this.draftStatusLabel.Text = "Draft Status: N/A";
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(791, 434);
+            this.Controls.Add(this.draftStatusLabel);
+            this.Controls.Add(this.draftButton);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.readyToFinishCheckBox);
             this.Controls.Add(this.locationMaterialTextBox);
@@ -483,5 +508,7 @@
         protected internal System.Windows.Forms.CheckBox readyToFinishCheckBox;
         protected internal System.Windows.Forms.Button submitButton;
         protected internal System.Windows.Forms.Button helpButton;
+        private System.Windows.Forms.Button draftButton;
+        private System.Windows.Forms.Label draftStatusLabel;
     }
 }

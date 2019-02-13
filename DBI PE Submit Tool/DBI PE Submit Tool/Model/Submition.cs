@@ -51,9 +51,10 @@ namespace DBI_PE_Submit_Tool.DAO
             }
         }
 
-        public Submition RestoreFromFile()
+        // Restore when students continue doing their exam.
+
+        public Submition Restore()
         {
-            // Restore when students continue doing their exam.
             try
             {
                 var dir = TestName;
