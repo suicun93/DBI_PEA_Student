@@ -29,7 +29,7 @@ namespace DBI_PE_Submit_Tool
             {
                 if (loginSuccess())
                 {
-                    ClientForm clientForm = new ClientForm(TestName, PaperNo, Username);
+                    ClientForm clientForm = new ClientForm(TestName, PaperNo, Username, restored: restoreCheckBox.Checked);
                     clientForm.Show();
                     this.Hide();
                 }

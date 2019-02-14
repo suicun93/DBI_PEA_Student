@@ -41,6 +41,7 @@
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.domainTextBox = new System.Windows.Forms.TextBox();
             this.loginButton = new System.Windows.Forms.Button();
+            this.restoreCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label
@@ -175,11 +176,21 @@
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.btnLogin_Click);
             // 
+            // restoreCheckBox
+            // 
+            this.restoreCheckBox.AutoSize = true;
+            this.restoreCheckBox.Location = new System.Drawing.Point(405, 23);
+            this.restoreCheckBox.Name = "restoreCheckBox";
+            this.restoreCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.restoreCheckBox.TabIndex = 22;
+            this.restoreCheckBox.UseVisualStyleBackColor = true;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(448, 251);
+            this.Controls.Add(this.restoreCheckBox);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.domainTextBox);
             this.Controls.Add(this.passwordTextBox);
@@ -215,6 +226,7 @@
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox domainTextBox;
         private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.CheckBox restoreCheckBox;
     }
 }
 

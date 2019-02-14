@@ -53,7 +53,7 @@ namespace DBI_PE_Submit_Tool.DAO
 
         // Restore when students continue doing their exam.
 
-        public Submition Restore()
+        public static Submition Restore(string TestName, string StudentID)
         {
             try
             {

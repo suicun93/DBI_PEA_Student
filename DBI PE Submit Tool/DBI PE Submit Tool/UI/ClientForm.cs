@@ -19,7 +19,7 @@ namespace DBI_PE_Submit_Tool
         private bool previewed = false; 
         public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
 
-        public ClientForm(string TestName, string PaperNo, string StudentName)
+        public ClientForm(string TestName, string PaperNo, string StudentName, bool restored)
         {
             InitializeComponent();
             if (String.IsNullOrEmpty(TestName) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName))
@@ -32,17 +32,17 @@ namespace DBI_PE_Submit_Tool
                 // TODO: Call API to get question here!
                 // Now I mock up an url to download (an image from w3school)
                 UrlDBToDownload = "https://www.w3schools.com/w3images/mac.jpg";
-                studentLabel.Text = this.submition.StudentID = StudentName;
-                paperNoLabel.Text = this.submition.PaperNo = PaperNo;
-                testNameLabel.Text = this.submition.TestName = TestName;
-                SetupUI();
+                studentLabel.Text = submition.StudentID = StudentName;
+                paperNoLabel.Text = submition.PaperNo = PaperNo;
+                testNameLabel.Text = submition.TestName = TestName;
+                SetupUI(restored);
             }
         }
 
         /// <summary>
         ///     Add all answer rich text box to list to add event draft answer on text change
         /// </summary>
-        private void SetupUI()
+        private void SetupUI(bool restored)
         {
             ListAnswer.Add(q1RichTextBox);
             ListAnswer.Add(q2RichTextBox);
@@ -54,6 +54,18 @@ namespace DBI_PE_Submit_Tool
             ListAnswer.Add(q8RichTextBox);
             ListAnswer.Add(q9RichTextBox);
             ListAnswer.Add(q10RichTextBox);
+
+            // Check restore and restore answers
+            if (restored)
+            {
+                // If student continue from break point, restore answers for them
+                submition = Submition.Restore(submition.TestName, submition.StudentID);
+                for (int i = 0; i < 10; i++)
+                {
+                    ListAnswer[i].Text = submition.ListAnswer[i];
+                }
+            }
+
             // Add event to draft every time answers changed
             for (int i = 0; i < ListAnswer.Count; i++)
             {
@@ -72,16 +84,23 @@ namespace DBI_PE_Submit_Tool
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             // List answers to preview
-            submition.Restore();
-            int i = 0;
-            string answers = "";
-            foreach (string answer in submition.ListAnswer)
+            submition = Submition.Restore(submition.TestName, submition.StudentID);
+            if (submition == null)
             {
-                i++;
-                answers += "Question " + i + "\n\t" + (String.IsNullOrEmpty(answer) ? "(empty)" : answer) + "\n";
+                MessageBox.Show("Restore failed");
             }
-            MessageBox.Show(answers);
-            previewed = true;
+            else
+            {
+                int i = 0;
+                string answers = "";
+                foreach (string answer in submition.ListAnswer)
+                {
+                    i++;
+                    answers += "Question " + i + "\n\t" + (String.IsNullOrEmpty(answer) ? "(empty)" : answer) + "\n";
+                }
+                MessageBox.Show(answers);
+                previewed = true;
+            }
         }
 
         private void DownloadMaterialButton_Click(object sender, EventArgs e)
