@@ -23,3 +23,18 @@ C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.dll
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.xml
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.CopyComplete
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.exe.config
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.exe
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.pdb
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.dll
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.xml
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csprojAssemblyReference.cache
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.ClientForm.resources
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.LoginForm.resources
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.Properties.Resources.resources
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.GenerateResource.cache
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.CoreCompileInputs.cache
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.CopyComplete
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.exe
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.pdb
+C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\EncryptData.dll
