@@ -20,6 +20,7 @@ namespace DBI_PE_Submit_Tool.Common
 
         private readonly ICryptoTransform decryptor;
 
+        // Password Salt
         private const string Password = "20182019";
 
         private static readonly byte[] passwordBytes = Encoding.ASCII.GetBytes(Password);
@@ -47,22 +48,14 @@ namespace DBI_PE_Submit_Tool.Common
             algorithm.Padding = PaddingMode.Zeros;
             return algorithm;
         }
-        /*
-         * 		[0]	50	byte
-		[1]	48	byte
-		[2]	49	byte
-		[3]	56	byte
-		[4]	50	byte
-		[5]	48	byte
-		[6]	49	byte
-		[7]	57	byte
-
-         */
+       
         public void Save(T obj)
         {
+
             using (var writer = new StreamWriter(new CryptoStream(File.Create(this.filePath), this.encryptor, CryptoStreamMode.Write)))
             {
                 writer.Write(JsonConvert.SerializeObject(obj));
+                writer.Close();
             }
         }
 
@@ -71,6 +64,7 @@ namespace DBI_PE_Submit_Tool.Common
             using (var reader = new StreamReader(new CryptoStream(File.OpenRead(this.filePath), this.decryptor, CryptoStreamMode.Read)))
             {
                 string json = reader.ReadToEnd();
+                reader.Close();
                 return JsonConvert.DeserializeObject<T>(json);
             }
         }

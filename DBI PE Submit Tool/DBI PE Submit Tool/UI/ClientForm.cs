@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using DBI_PE_Submit_Tool.DAO;
+using DBI_PE_Submit_Tool.Model;
 using DBI_PE_Submit_Tool.Common;
 
 namespace DBI_PE_Submit_Tool
@@ -12,7 +12,7 @@ namespace DBI_PE_Submit_Tool
         // Information about student: studentID, paperNo, testName, urlDB to get material, listAnswer;
         private string UrlDB;
         private List<RichTextBox> ListAnswer = new List<RichTextBox>();
-        private Submition submition = new Submition();
+        private Submition submition;
         // Merge draft and submit to 1 method with a variable named "forDraft"
         private bool forDraft = true, forSubmit = false; 
         // Make student preview their answers before submitting
@@ -32,9 +32,11 @@ namespace DBI_PE_Submit_Tool
                 // TODO: Call API to get question here!
                 // Now I mock up an url to download (an image from w3school)
                 UrlDBToDownload = "https://www.w3schools.com/w3images/mac.jpg";
-                studentLabel.Text = submition.StudentID = StudentName;
-                paperNoLabel.Text = submition.PaperNo = PaperNo;
-                testNameLabel.Text = submition.TestName = TestName;
+                studentLabel.Text = StudentName;
+                paperNoLabel.Text = PaperNo;
+                testNameLabel.Text = TestName;
+                submition = new Submition(TestName, StudentName, PaperNo);
+                submition.register();
                 SetupUI(restored);
             }
         }
@@ -59,7 +61,7 @@ namespace DBI_PE_Submit_Tool
             if (restored)
             {
                 // If student continue from break point, restore answers for them
-                submition = Submition.Restore(submition.TestName, submition.StudentID);
+                submition.Restore();
                 for (int i = 0; i < 10; i++)
                 {
                     ListAnswer[i].Text = submition.ListAnswer[i];
@@ -84,7 +86,7 @@ namespace DBI_PE_Submit_Tool
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             // List answers to preview
-            submition = Submition.Restore(submition.TestName, submition.StudentID);
+            submition.Restore();
             if (submition == null)
             {
                 MessageBox.Show("Restore failed");

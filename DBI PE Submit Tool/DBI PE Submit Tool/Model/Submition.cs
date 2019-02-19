@@ -1,24 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+using DBI_PE_Submit_Tool.Common;
+using System.Windows.Forms;
 
-namespace DBI_PE_Submit_Tool.DAO
+namespace DBI_PE_Submit_Tool.Model
 {
     [Serializable]
     public class Submition
     {
-        public Submition()
-        {
-            ListAnswer = new List<string>();
-        }
         public string StudentID { get; set; }
         public string TestName { get; set; }
         public string PaperNo { get; set; }
         public List<string> ListAnswer { get; set; }
+        public SecureJsonSerializer<Submition> secureJsonSerializer;
+
+        public Submition(string testName, string studentID, string paperNo)
+        {
+            TestName = testName;
+            StudentID = studentID;
+            PaperNo = paperNo;
+            ListAnswer = new List<string>();
+        }
+
+        public void register()
+        {
+            var dir = TestName;
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            secureJsonSerializer = new SecureJsonSerializer<Submition>(Path.Combine(dir, StudentID + ".dat"));
+        }
 
         public void AddAnswer(string answer)
         {
@@ -36,42 +49,53 @@ namespace DBI_PE_Submit_Tool.DAO
             try
             {
                 // Write file to path TestName/StudentID.dat
-                string json = JsonConvert.SerializeObject(this);
-                string encodedJson = Common.Coding.Encode(json);
-                var dir = TestName;
-                if (!Directory.Exists(dir))
-                {
-                    Directory.CreateDirectory(dir);
-                }
-                File.WriteAllText(Path.Combine(dir, StudentID + ".dat") , encodedJson);
+                secureJsonSerializer.Save(this);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
             }
         }
 
         // Restore when students continue doing their exam.
-
-        public static Submition Restore(string TestName, string StudentID)
+        public void Restore()
         {
             try
             {
                 var dir = TestName;
                 if (Directory.Exists(dir))
                 {
-                    string json = File.ReadAllText(Path.Combine(dir, StudentID + ".dat"));
-                    string decodedJson = Common.Coding.Decode(json);
-                    Submition submition = JsonConvert.DeserializeObject<Submition>(decodedJson);
-                    return submition;
+                    Submition submition;
+                    try
+                    {
+                        submition = secureJsonSerializer.Load();
+                        // Load successfully
+                        this.ListAnswer = new List<string>();
+                        foreach (var answer in submition.ListAnswer)
+                        {
+                            this.ListAnswer.Add(answer);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // Load fail
+                        MessageBox.Show("Restore fail");
+                        // Create new list
+                        for (int i = 0; i < 10; i++)
+                        {
+                            this.ListAnswer.Add("");
+                        }
+                    }
                 }
-                throw new Exception("No file was found!");
+                else
+                {
+                    throw new Exception("No file was found");
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
             }
-            return null;
         }
     }
 }
