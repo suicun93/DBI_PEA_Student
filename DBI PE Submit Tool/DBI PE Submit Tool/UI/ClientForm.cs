@@ -148,24 +148,34 @@ namespace DBI_PE_Submit_Tool
             {
                 submition.AddAnswer(richTextBox.Text);
             }
-            submition.SaveToLocal();
-            if (forDraft)
+            try
             {
-                // TODO: Call API to draft all answer, test name, student's rollID, paper number
-                // CallAPIToDraft()
-                // Change UI Draft Status UI to draft success
-                draftStatusLabel.Text = "Draft Status: Success";
-                draftStatusLabel.ForeColor = Color.Green;
+                submition.SaveToLocal();
+                if (forDraft)
+                {
+                    // TODO: Call API to draft all answer, test name, student's rollID, paper number
+                    // CallAPIToDraft()
+                    // Change UI Draft Status UI to draft success
+                    draftStatusLabel.Text = "Draft Status: Success";
+                    draftStatusLabel.ForeColor = Color.Green;
+                }
+                else
+                {
+                    // TODO: Call API to submit all answer, test name, studentID, paper number
+                    // CallAPIToSubmit()
+                    // Change UI Draft Status UI to submit success
+                    draftStatusLabel.Text = "Submit Status: Success";
+                    draftStatusLabel.ForeColor = Color.Green;
+                    MessageBox.Show(submition.StudentID + " have submitted something");
+                }
             }
-            else
+            catch (Exception)
             {
-                // TODO: Call API to submit all answer, test name, studentID, paper number
-                // CallAPIToSubmit()
-                // Change UI Draft Status UI to submit success
-                draftStatusLabel.Text = "Submit Status: Success";
-                draftStatusLabel.ForeColor = Color.Green;
-                MessageBox.Show(submition.StudentID + " have submitted something");
+                // Change UI Draft Status UI 
+                draftStatusLabel.Text = "Draft Status: N/A";
+                draftStatusLabel.ForeColor = Color.Red;
             }
+            
         }
 
         /// <summary>

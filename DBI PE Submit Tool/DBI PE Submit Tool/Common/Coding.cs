@@ -11,9 +11,9 @@ using Newtonsoft.Json;
 
 namespace DBI_PE_Submit_Tool.Common
 {
-    class Coding
+    public class Coding<T>
     {
-        public static string Encryption(string strText)
+        private string Encryption(string strText)
         {
             var publicKey = "<RSAKeyValue>" +
                 "<Modulus>" +
@@ -24,7 +24,7 @@ namespace DBI_PE_Submit_Tool.Common
 
             var testData = Encoding.UTF8.GetBytes(strText);
 
-            using (var rsa = new RSACryptoServiceProvider(4096))
+            using (var rsa = new RSACryptoServiceProvider(2048))
             {
                 try
                 {
@@ -44,7 +44,7 @@ namespace DBI_PE_Submit_Tool.Common
             }
         }
 
-        public static string Decryption(string strText)
+        private string Decryption(string strText)
         {
             var privateKey = "<RSAKeyValue>" +
                 "<Modulus>" +
@@ -64,7 +64,7 @@ namespace DBI_PE_Submit_Tool.Common
 
             var testData = Encoding.UTF8.GetBytes(strText);
 
-            using (var rsa = new RSACryptoServiceProvider(4096))
+            using (var rsa = new RSACryptoServiceProvider(2048))
             {
                 try
                 {
@@ -96,12 +96,12 @@ namespace DBI_PE_Submit_Tool.Common
             filePath = file;
         }
 
-        public void Save(Submition submition)
+        public void Save(T t)
         {
             // Convert object to json
-            string json = JsonConvert.SerializeObject(submition);
+            string json = JsonConvert.SerializeObject(t);
             // Spit json by 100
-            string[] arrayOfJson = Split(json, 100).ToArray();
+            string[] arrayOfJson = Split(json, 50).ToArray();
             // Encrypt all of it
             List<string> hihi = new List<string>();
             foreach (string item in arrayOfJson)
@@ -112,7 +112,7 @@ namespace DBI_PE_Submit_Tool.Common
             File.WriteAllLines(filePath, hihi.ToArray());
         }
 
-        public Submition Load()
+        public T Load()
         {
             // Read from file by line
             string[] lines = File.ReadAllLines(filePath);
@@ -123,13 +123,13 @@ namespace DBI_PE_Submit_Tool.Common
                 json = json + Decryption(item);
             }
             // Deconvert json to object
-            return JsonConvert.DeserializeObject<Submition>(json);
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
-        IEnumerable<string> Split(string str, int chunkSize)
+        private IEnumerable<string> Split(string str, int maxChunkSize)
         {
-            return Enumerable.Range(0, str.Length / chunkSize)
-                .Select(i => str.Substring(i * chunkSize, chunkSize));
+            for (int i = 0; i < str.Length; i += maxChunkSize)
+                yield return str.Substring(i, Math.Min(maxChunkSize, str.Length - i));
         }
     }
 }
