@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="Common\Coding.cs" />
     <Compile Include="Common\Constant.cs" />
-    <Compile Include="Common\Crypto.cs" />
     <Compile Include="Common\Download.cs" />
     <Compile Include="Common\SecureJsonSerializer.cs" />
     <Compile Include="Model\Submition.cs" />

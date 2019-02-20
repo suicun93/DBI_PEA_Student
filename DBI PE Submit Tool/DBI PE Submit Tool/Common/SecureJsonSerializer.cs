@@ -21,14 +21,14 @@ namespace DBI_PE_Submit_Tool.Common
         private readonly ICryptoTransform decryptor;
 
         // Password Salt
-        private const string Password = "20182019";
+        private const string salt = "02341235XadfaDADFexA8932F7Dz3J3X";
 
-        private static readonly byte[] passwordBytes = Encoding.ASCII.GetBytes(Password);
+        private static readonly byte[] saltByte = Encoding.ASCII.GetBytes(salt);
 
         /// <summary>
         /// Key to generate rmCrypto
         /// </summary>
-        private static Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(Inputkey, passwordBytes);
+        private static Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(Inputkey, (new SHA512Managed()).ComputeHash(saltByte));
 
         public SecureJsonSerializer(string filePath)
         {

@@ -13,7 +13,7 @@ namespace DBI_PE_Submit_Tool.Model
         public string TestName { get; set; }
         public string PaperNo { get; set; }
         public List<string> ListAnswer { get; set; }
-        private Coding<Submition> coding = null;
+        public SecureJsonSerializer<Submition> secureJsonSerializer;
 
         public Submition(string testName, string studentID, string paperNo)
         {
@@ -30,7 +30,7 @@ namespace DBI_PE_Submit_Tool.Model
             {
                 Directory.CreateDirectory(dir);
             }
-            coding = new Coding<Submition>(Path.Combine(dir, StudentID + ".dat"));
+            secureJsonSerializer = new SecureJsonSerializer<Submition>(Path.Combine(dir, StudentID + ".dat"));
         }
 
         public void AddAnswer(string answer)
@@ -49,7 +49,7 @@ namespace DBI_PE_Submit_Tool.Model
             try
             {
                 // Write file to path TestName/StudentID.dat
-                coding.Save(this);
+                secureJsonSerializer.Save(this);
             }
             catch (Exception e)
             {
@@ -68,7 +68,7 @@ namespace DBI_PE_Submit_Tool.Model
                     Submition submition;
                     try
                     {
-                        submition = coding.Load();
+                        submition = secureJsonSerializer.Load();
                         // Load successfully
                         this.ListAnswer = new List<string>();
                         foreach (var answer in submition.ListAnswer)
