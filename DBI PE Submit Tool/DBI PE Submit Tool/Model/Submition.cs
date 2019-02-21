@@ -1,7 +1,8 @@
-﻿using System;
+﻿using DBI_PE_Submit_Tool.Common;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using DBI_PE_Submit_Tool.Common;
 using System.Windows.Forms;
 
 namespace DBI_PE_Submit_Tool.Model
@@ -13,7 +14,13 @@ namespace DBI_PE_Submit_Tool.Model
         public string ExamCode { get; set; }
         public string PaperNo { get; set; }
         public List<string> ListAnswer { get; set; }
+        [JsonIgnore]
         public SecureJsonSerializer<Submition> secureJsonSerializer;
+
+        public Submition()
+        {
+
+        }
 
         public Submition(string examCode, string studentID, string paperNo)
         {
