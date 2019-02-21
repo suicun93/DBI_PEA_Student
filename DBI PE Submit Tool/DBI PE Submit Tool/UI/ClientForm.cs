@@ -9,7 +9,7 @@ namespace DBI_PE_Submit_Tool
 {
     public partial class ClientForm : Form
     {
-        // Information about student: studentID, paperNo, testName, urlDB to get material, listAnswer;
+        // Information about student: studentID, paperNo, examCode, urlDB to get material, listAnswer;
         private string UrlDB;
         private List<RichTextBox> ListAnswer = new List<RichTextBox>();
         private Submition submition;
@@ -19,10 +19,10 @@ namespace DBI_PE_Submit_Tool
         private bool previewed = false; 
         public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
 
-        public ClientForm(string TestName, string PaperNo, string StudentName, bool restored)
+        public ClientForm(string examCode, string PaperNo, string StudentName, bool restored)
         {
             InitializeComponent();
-            if (String.IsNullOrEmpty(TestName) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName))
+            if (String.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName))
             {
                 MessageBox.Show("Empty Information");
                 Application.Exit();
@@ -34,8 +34,8 @@ namespace DBI_PE_Submit_Tool
                 UrlDBToDownload = "https://www.w3schools.com/w3images/mac.jpg";
                 studentLabel.Text = StudentName;
                 paperNoLabel.Text = PaperNo;
-                testNameLabel.Text = TestName;
-                submition = new Submition(TestName, StudentName, PaperNo);
+                examCodeLabel.Text = examCode;
+                submition = new Submition(examCode, StudentName, PaperNo);
                 submition.register();
                 SetupUI(restored);
             }
@@ -153,7 +153,7 @@ namespace DBI_PE_Submit_Tool
                 submition.SaveToLocal();
                 if (forDraft)
                 {
-                    // TODO: Call API to draft all answer, test name, student's rollID, paper number
+                    // TODO: Call API to draft all answer, exam code, student's rollID, paper number
                     // CallAPIToDraft()
                     // Change UI Draft Status UI to draft success
                     draftStatusLabel.Text = "Draft Status: Success";
@@ -161,7 +161,7 @@ namespace DBI_PE_Submit_Tool
                 }
                 else
                 {
-                    // TODO: Call API to submit all answer, test name, studentID, paper number
+                    // TODO: Call API to submit all answer, exam code, studentID, paper number
                     // CallAPIToSubmit()
                     // Change UI Draft Status UI to submit success
                     draftStatusLabel.Text = "Submit Status: Success";

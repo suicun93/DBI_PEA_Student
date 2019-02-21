@@ -5,7 +5,7 @@ namespace DBI_PE_Submit_Tool
 {
     public partial class LoginForm : Form
     {
-        private string TestName { get; set; }
+        private string Examcode { get; set; }
         private string PaperNo { get; set; }
         private string Username { get; set; }
         private string Password { get; set; }
@@ -22,7 +22,7 @@ namespace DBI_PE_Submit_Tool
             {
                 if (loginSuccess())
                 {
-                    ClientForm clientForm = new ClientForm(TestName, PaperNo, Username, restored: restoreCheckBox.Checked);
+                    ClientForm clientForm = new ClientForm(Examcode, PaperNo, Username, restored: restoreCheckBox.Checked);
                     clientForm.Show();
                     this.Hide();
                 }
@@ -48,12 +48,12 @@ namespace DBI_PE_Submit_Tool
         {
             try
             {
-                TestName = testNameTextBox.Text;
+                Examcode = examCodeTextBox.Text;
                 PaperNo = paperNoTextBox.Text;
                 Username = usernameTextBox.Text;
                 Password = passwordTextBox.Text;
                 Domain = domainTextBox.Text;
-                if (String.IsNullOrEmpty(TestName) ||
+                if (String.IsNullOrEmpty(Examcode) ||
                     String.IsNullOrEmpty(PaperNo) ||
                     String.IsNullOrEmpty(Username) ||
                     String.IsNullOrEmpty(Password) ||

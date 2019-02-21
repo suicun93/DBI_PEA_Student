@@ -10,14 +10,14 @@ namespace DBI_PE_Submit_Tool.Model
     public class Submition
     {
         public string StudentID { get; set; }
-        public string TestName { get; set; }
+        public string ExamCode { get; set; }
         public string PaperNo { get; set; }
         public List<string> ListAnswer { get; set; }
         public SecureJsonSerializer<Submition> secureJsonSerializer;
 
-        public Submition(string testName, string studentID, string paperNo)
+        public Submition(string examCode, string studentID, string paperNo)
         {
-            TestName = testName;
+            ExamCode = examCode;
             StudentID = studentID;
             PaperNo = paperNo;
             ListAnswer = new List<string>();
@@ -25,7 +25,7 @@ namespace DBI_PE_Submit_Tool.Model
 
         public void register()
         {
-            var dir = TestName;
+            var dir = ExamCode;
             if (!Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
@@ -48,7 +48,7 @@ namespace DBI_PE_Submit_Tool.Model
             // When drafting answers from student, we save it to local
             try
             {
-                // Write file to path TestName/StudentID.dat
+                // Write file to path ExamCode/StudentID.dat
                 secureJsonSerializer.Save(this);
             }
             catch (Exception e)
@@ -62,7 +62,7 @@ namespace DBI_PE_Submit_Tool.Model
         {
             try
             {
-                var dir = TestName;
+                var dir = ExamCode;
                 if (Directory.Exists(dir))
                 {
                     Submition submition;

@@ -33,7 +33,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.helpButton = new System.Windows.Forms.Button();
-            this.testNameLabel = new System.Windows.Forms.Label();
+            this.examCodeLabel = new System.Windows.Forms.Label();
             this.studentLabel = new System.Windows.Forms.Label();
             this.paperNoLabel = new System.Windows.Forms.Label();
             this.downloadMaterialButton = new System.Windows.Forms.Button();
@@ -93,9 +93,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 57);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Test name: ";
+            this.label2.Text = "Exam Code:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // label3
@@ -128,17 +128,17 @@
             this.helpButton.UseVisualStyleBackColor = true;
             this.helpButton.Click += new System.EventHandler(this.HelpButton_Click);
             // 
-            // testNameLabel
+            // examCodeLabel
             // 
-            this.testNameLabel.AutoSize = true;
-            this.testNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.testNameLabel.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.testNameLabel.Location = new System.Drawing.Point(100, 51);
-            this.testNameLabel.Name = "testNameLabel";
-            this.testNameLabel.Size = new System.Drawing.Size(105, 25);
-            this.testNameLabel.TabIndex = 6;
-            this.testNameLabel.Text = "Test name";
-            this.testNameLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.examCodeLabel.AutoSize = true;
+            this.examCodeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.examCodeLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.examCodeLabel.Location = new System.Drawing.Point(100, 51);
+            this.examCodeLabel.Name = "examCodeLabel";
+            this.examCodeLabel.Size = new System.Drawing.Size(110, 25);
+            this.examCodeLabel.TabIndex = 6;
+            this.examCodeLabel.Text = "Exam code";
+            this.examCodeLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // studentLabel
             // 
@@ -447,7 +447,7 @@
             this.Controls.Add(this.downloadMaterialButton);
             this.Controls.Add(this.paperNoLabel);
             this.Controls.Add(this.studentLabel);
-            this.Controls.Add(this.testNameLabel);
+            this.Controls.Add(this.examCodeLabel);
             this.Controls.Add(this.helpButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -478,7 +478,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label testNameLabel;
+        private System.Windows.Forms.Label examCodeLabel;
         private System.Windows.Forms.Label studentLabel;
         private System.Windows.Forms.Label paperNoLabel;
         private System.Windows.Forms.Button downloadMaterialButton;

@@ -35,7 +35,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.testNameTextBox = new System.Windows.Forms.TextBox();
+            this.examCodeTextBox = new System.Windows.Forms.TextBox();
             this.paperNoTextBox = new System.Windows.Forms.TextBox();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
@@ -68,7 +68,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(34, 53);
+            this.label9.Location = new System.Drawing.Point(37, 53);
             this.label9.Margin = new System.Windows.Forms.Padding(3);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(3);
@@ -80,7 +80,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(43, 149);
+            this.label10.Location = new System.Drawing.Point(46, 149);
             this.label10.Margin = new System.Windows.Forms.Padding(3);
             this.label10.Name = "label10";
             this.label10.Padding = new System.Windows.Forms.Padding(3);
@@ -92,7 +92,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(31, 85);
+            this.label11.Location = new System.Drawing.Point(34, 85);
             this.label11.Margin = new System.Windows.Forms.Padding(3);
             this.label11.Name = "label11";
             this.label11.Padding = new System.Windows.Forms.Padding(3);
@@ -104,7 +104,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(33, 117);
+            this.label12.Location = new System.Drawing.Point(36, 117);
             this.label12.Margin = new System.Windows.Forms.Padding(3);
             this.label12.Name = "label12";
             this.label12.Padding = new System.Windows.Forms.Padding(3);
@@ -120,18 +120,18 @@
             this.label1.Margin = new System.Windows.Forms.Padding(3);
             this.label1.Name = "label1";
             this.label1.Padding = new System.Windows.Forms.Padding(3);
-            this.label1.Size = new System.Drawing.Size(66, 19);
+            this.label1.Size = new System.Drawing.Size(69, 19);
             this.label1.TabIndex = 15;
-            this.label1.Text = "Test name:";
+            this.label1.Text = "Exam code:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // testNameTextBox
+            // examCodeTextBox
             // 
-            this.testNameTextBox.Location = new System.Drawing.Point(117, 20);
-            this.testNameTextBox.Name = "testNameTextBox";
-            this.testNameTextBox.Size = new System.Drawing.Size(271, 20);
-            this.testNameTextBox.TabIndex = 16;
-            this.testNameTextBox.Text = "PE_DBI_1_SP2019_567899";
+            this.examCodeTextBox.Location = new System.Drawing.Point(117, 20);
+            this.examCodeTextBox.Name = "examCodeTextBox";
+            this.examCodeTextBox.Size = new System.Drawing.Size(271, 20);
+            this.examCodeTextBox.TabIndex = 16;
+            this.examCodeTextBox.Text = "PE_DBI_1_SP2019_567899";
             // 
             // paperNoTextBox
             // 
@@ -196,7 +196,7 @@
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.paperNoTextBox);
-            this.Controls.Add(this.testNameTextBox);
+            this.Controls.Add(this.examCodeTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -220,7 +220,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox testNameTextBox;
+        private System.Windows.Forms.TextBox examCodeTextBox;
         private System.Windows.Forms.TextBox paperNoTextBox;
         private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
