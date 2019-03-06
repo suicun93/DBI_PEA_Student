@@ -19,6 +19,8 @@ namespace DBI_PE_Submit_Tool
         private bool previewed = false; 
         public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
 
+        public int QuestionNumber { get; set; } = 10;
+
         public ClientForm(string examCode, string PaperNo, string StudentName, bool restored)
         {
             InitializeComponent();
@@ -37,7 +39,27 @@ namespace DBI_PE_Submit_Tool
                 examCodeLabel.Text = examCode;
                 submition = new Submition(examCode, StudentName, PaperNo);
                 submition.register();
+
+                SetupTab();
                 SetupUI(restored);
+            }
+        }
+
+        private void SetupTab()
+        {
+            tabBar.TabPages.Clear();
+
+            for (int i = 0; i < QuestionNumber; i++)
+            {
+                string title = "" + (i + 1);
+                TabPage tab = new TabPage(title);
+
+                RichTextBox textBox = new RichTextBox();
+                textBox.Name = "textBox";
+                textBox.Dock = DockStyle.Fill;
+                tab.Controls.Add(textBox);
+
+                tabBar.TabPages.Add(tab);
             }
         }
 
@@ -46,23 +68,29 @@ namespace DBI_PE_Submit_Tool
         /// </summary>
         private void SetupUI(bool restored)
         {
-            ListAnswer.Add(q1RichTextBox);
-            ListAnswer.Add(q2RichTextBox);
-            ListAnswer.Add(q3RichTextBox);
-            ListAnswer.Add(q4RichTextBox);
-            ListAnswer.Add(q5RichTextBox);
-            ListAnswer.Add(q6RichTextBox);
-            ListAnswer.Add(q7RichTextBox);
-            ListAnswer.Add(q8RichTextBox);
-            ListAnswer.Add(q9RichTextBox);
-            ListAnswer.Add(q10RichTextBox);
+        //    ListAnswer.Add(q1RichTextBox);
+        //    ListAnswer.Add(q2RichTextBox);
+        //    ListAnswer.Add(q3RichTextBox);
+        //    ListAnswer.Add(q4RichTextBox);
+        //    ListAnswer.Add(q5RichTextBox);
+        //    ListAnswer.Add(q6RichTextBox);
+        //    ListAnswer.Add(q7RichTextBox);
+        //    ListAnswer.Add(q8RichTextBox);
+        //    ListAnswer.Add(q9RichTextBox);
+        //    ListAnswer.Add(q10RichTextBox);
+
+            for (int i = 0; i < QuestionNumber; i++)
+            {
+                RichTextBox box = (RichTextBox)tabBar.TabPages[i].Controls["textBox"];
+                ListAnswer.Add(box);
+            }
 
             // Check restore and restore answers
             if (restored)
             {
                 // If student continue from break point, restore answers for them
                 submition.Restore();
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < QuestionNumber; i++)
                 {
                     ListAnswer[i].Text = submition.ListAnswer[i];
                 }
