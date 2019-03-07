@@ -39,3 +39,18 @@ C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\
 C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.pdb
 C:\dev\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\EncryptData.dll
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\EncryptData.dll
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.exe.config
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.exe
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.pdb
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\EncryptData.dll
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.dll
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Newtonsoft.Json.xml
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csprojAssemblyReference.cache
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.ClientForm.resources
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.LoginForm.resources
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.Properties.Resources.resources
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.GenerateResource.cache
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.CoreCompileInputs.cache
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.CopyComplete
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.exe
+E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.pdb

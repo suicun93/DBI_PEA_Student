@@ -78,5 +78,10 @@ namespace DBI_PE_Submit_Tool
         {
             Application.Exit();
         }
+
+        private void usernameTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
