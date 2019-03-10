@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DBI_PE_Submit_Tool.Model;
 using DBI_PE_Submit_Tool.Common;
+using System.Threading;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -190,11 +191,16 @@ namespace DBI_PE_Submit_Tool
                 else
                 {
                     // TODO: Call API to submit all answer, exam code, studentID, paper number
+
                     // CallAPIToSubmit()
+                    // Make some time-out here!
+                    Thread t = new Thread(handleSubmit);
+                    t.Start();
+
                     // Change UI Draft Status UI to submit success
-                    draftStatusLabel.Text = "Submit Status: Success";
-                    draftStatusLabel.ForeColor = Color.Green;
-                    MessageBox.Show(submition.StudentID + " have submitted something");
+                    //draftStatusLabel.Text = "Submit Status: Success";
+                    //draftStatusLabel.ForeColor = Color.Green;
+                    //MessageBox.Show(submition.StudentID + " have submitted something");
                 }
             }
             catch (Exception)
@@ -204,6 +210,22 @@ namespace DBI_PE_Submit_Tool
                 draftStatusLabel.ForeColor = Color.Red;
             }
             
+        }
+
+        private void handleSubmit()
+        {
+            void doAfterSubmit(string text)
+            {
+                MessageBox.Show(text);
+            }
+            bool result = submition.submit(doAfterSubmit);
+            if (result)
+            {
+                // Change UI Draft Status UI to submit success
+                draftStatusLabel.Text = "Submit Status: Success";
+                draftStatusLabel.ForeColor = Color.Green;
+                MessageBox.Show(submition.StudentID + " have submitted something");
+            }
         }
 
         /// <summary>

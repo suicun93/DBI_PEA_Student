@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace DBI_PE_Submit_Tool.Model
@@ -62,6 +63,36 @@ namespace DBI_PE_Submit_Tool.Model
             {
                 MessageBox.Show(e.Message);
             }
+        }
+
+        public delegate void DoAfterSubmit(string text);
+
+        // call POST '/submit' api.
+        public bool submit(DoAfterSubmit doAfterSubmit)
+        {
+            string urlString = "http://localhost:8080/submit";
+            Uri uri = new Uri(urlString);
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+
+                    var parameters = new System.Collections.Specialized.NameValueCollection();
+                    parameters.Add("username", StudentID);
+                    var data = JsonConvert.SerializeObject(this);
+                    parameters.Add("answers", data);
+
+                    byte[] responseBytes = client.UploadValues(uri, "POST", parameters);
+                    string responseBody = System.Text.Encoding.UTF8.GetString(responseBytes);
+                    doAfterSubmit(responseBody);
+                    return true;
+                } catch (Exception e)
+                {
+                    doAfterSubmit(e.Message);
+                }
+            }
+            return false;
         }
 
         // Restore when students continue doing their exam.
