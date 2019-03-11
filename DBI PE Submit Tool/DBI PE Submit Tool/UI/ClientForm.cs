@@ -130,7 +130,8 @@ namespace DBI_PE_Submit_Tool
 
         private void DownloadMaterialButton_Click(object sender, EventArgs e)
         {
-            Download.DownloadFrom(UrlDBToDownload, locationMaterialTextBox);
+            //Download.DownloadFrom(UrlDBToDownload, Token , locationMaterialTextBox);
+            Download.PostDownloadMaterial(UrlDBToDownload, Token);
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
