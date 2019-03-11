@@ -22,23 +22,27 @@ namespace DBI_PE_Submit_Tool
 
         public int QuestionNumber { get; set; } = 10;
 
-        public ClientForm(string examCode, string PaperNo, string StudentName, bool restored)
+        private string Token;
+
+        public ClientForm(string examCode, string PaperNo, string StudentName, bool restored, string token)
         {
             InitializeComponent();
-            if (String.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName))
+            if (String.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName) || String.IsNullOrEmpty(token))
             {
                 MessageBox.Show("Empty Information");
                 Application.Exit();
             }
             else
             {
+                Token = token;
                 // TODO: Call API to get question here!
+
                 // Now I mock up an url to download (an image from w3school)
                 UrlDBToDownload = "https://www.w3schools.com/w3images/mac.jpg";
                 studentLabel.Text = StudentName;
                 paperNoLabel.Text = PaperNo;
                 examCodeLabel.Text = examCode;
-                submition = new Submition(examCode, StudentName, PaperNo);
+                submition = new Submition(examCode, StudentName, PaperNo, Token);
                 submition.register();
 
                 SetupTab();
@@ -69,17 +73,6 @@ namespace DBI_PE_Submit_Tool
         /// </summary>
         private void SetupUI(bool restored)
         {
-        //    ListAnswer.Add(q1RichTextBox);
-        //    ListAnswer.Add(q2RichTextBox);
-        //    ListAnswer.Add(q3RichTextBox);
-        //    ListAnswer.Add(q4RichTextBox);
-        //    ListAnswer.Add(q5RichTextBox);
-        //    ListAnswer.Add(q6RichTextBox);
-        //    ListAnswer.Add(q7RichTextBox);
-        //    ListAnswer.Add(q8RichTextBox);
-        //    ListAnswer.Add(q9RichTextBox);
-        //    ListAnswer.Add(q10RichTextBox);
-
             for (int i = 0; i < QuestionNumber; i++)
             {
                 RichTextBox box = (RichTextBox)tabBar.TabPages[i].Controls["textBox"];

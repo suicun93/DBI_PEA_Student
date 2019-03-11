@@ -18,16 +18,20 @@ namespace DBI_PE_Submit_Tool.Model
         [JsonIgnore]
         public SecureJsonSerializer<Submition> secureJsonSerializer;
 
+        private string apiUrl = Constant.API_URL;
+        private string Token;
+
         public Submition()
         {
 
         }
 
-        public Submition(string examCode, string studentID, string paperNo)
+        public Submition(string examCode, string studentID, string paperNo, string token)
         {
             ExamCode = examCode;
             StudentID = studentID;
             PaperNo = paperNo;
+            Token = token;
             ListAnswer = new List<string>();
         }
 
@@ -70,8 +74,8 @@ namespace DBI_PE_Submit_Tool.Model
         // call POST '/submit' api.
         public bool submit(DoAfterSubmit doAfterSubmit)
         {
-            string urlString = "http://localhost:8080/submit";
-            Uri uri = new Uri(urlString);
+            string submitUrl = apiUrl + "/submit";
+            Uri uri = new Uri(submitUrl);
             using (WebClient client = new WebClient())
             {
                 try
@@ -80,6 +84,10 @@ namespace DBI_PE_Submit_Tool.Model
 
                     var parameters = new System.Collections.Specialized.NameValueCollection();
                     parameters.Add("username", StudentID);
+                    parameters.Add("examCode", ExamCode);
+                    parameters.Add("paperNo", PaperNo);
+                    parameters.Add("token", Token);
+
                     var data = JsonConvert.SerializeObject(this);
                     parameters.Add("answers", data);
 
