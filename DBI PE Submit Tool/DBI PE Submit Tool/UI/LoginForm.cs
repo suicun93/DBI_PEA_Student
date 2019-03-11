@@ -16,7 +16,7 @@ namespace DBI_PE_Submit_Tool
         private string Domain { get; set; }
 
         private string apiUrl = Constant.API_URL;
-        private string token;
+        private string token = "";
 
         public LoginForm()
         {
@@ -29,7 +29,7 @@ namespace DBI_PE_Submit_Tool
             {
                 if (loginSuccess())
                 {
-                    ClientForm clientForm = new ClientForm(Examcode, PaperNo, Username, restored: restoreCheckBox.Checked, token);
+                    ClientForm clientForm = new ClientForm(Examcode, PaperNo, Username, token, restored: restoreCheckBox.Checked);
                     clientForm.Show();
                     this.Hide();
                 }

@@ -24,7 +24,7 @@ namespace DBI_PE_Submit_Tool
 
         private string Token;
 
-        public ClientForm(string examCode, string PaperNo, string StudentName, bool restored, string token)
+        public ClientForm(string examCode, string PaperNo, string StudentName, string token, bool restored)
         {
             InitializeComponent();
             if (String.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName) || String.IsNullOrEmpty(token))
