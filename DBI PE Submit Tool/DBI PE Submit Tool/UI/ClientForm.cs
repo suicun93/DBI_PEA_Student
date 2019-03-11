@@ -38,7 +38,8 @@ namespace DBI_PE_Submit_Tool
                 // TODO: Call API to get question here!
 
                 // Now I mock up an url to download (an image from w3school)
-                UrlDBToDownload = "https://www.w3schools.com/w3images/mac.jpg";
+                UrlDBToDownload = Constant.API_URL + "/material";
+
                 studentLabel.Text = StudentName;
                 paperNoLabel.Text = PaperNo;
                 examCodeLabel.Text = examCode;
