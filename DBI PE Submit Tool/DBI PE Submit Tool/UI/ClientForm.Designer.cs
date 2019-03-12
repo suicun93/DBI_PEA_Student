@@ -382,6 +382,7 @@
             this.label5.Size = new System.Drawing.Size(47, 13);
             this.label5.TabIndex = 11;
             this.label5.Text = "Save at:";
+            this.label5.Visible = false;
             // 
             // locationMaterialTextBox
             // 
@@ -390,6 +391,7 @@
             this.locationMaterialTextBox.Name = "locationMaterialTextBox";
             this.locationMaterialTextBox.Size = new System.Drawing.Size(457, 20);
             this.locationMaterialTextBox.TabIndex = 12;
+            this.locationMaterialTextBox.Visible = false;
             // 
             // readyToFinishCheckBox
             // 

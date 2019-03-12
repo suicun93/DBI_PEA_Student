@@ -147,7 +147,6 @@
             this.usernameTextBox.Name = "usernameTextBox";
             this.usernameTextBox.Size = new System.Drawing.Size(271, 20);
             this.usernameTextBox.TabIndex = 18;
-            this.usernameTextBox.Text = "S01215";
             this.usernameTextBox.TextChanged += new System.EventHandler(this.usernameTextBox_TextChanged);
             // 
             // passwordTextBox
@@ -156,16 +155,16 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(271, 20);
             this.passwordTextBox.TabIndex = 19;
-            this.passwordTextBox.Text = "duc123";
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // domainTextBox
             // 
+            this.domainTextBox.Enabled = false;
             this.domainTextBox.Location = new System.Drawing.Point(117, 148);
             this.domainTextBox.Name = "domainTextBox";
             this.domainTextBox.Size = new System.Drawing.Size(271, 20);
             this.domainTextBox.TabIndex = 20;
-            this.domainTextBox.Text = "fu.edu.vn";
+            this.domainTextBox.Text = "34.215.75.169";
             // 
             // loginButton
             // 
@@ -185,6 +184,7 @@
             this.restoreCheckBox.Size = new System.Drawing.Size(15, 14);
             this.restoreCheckBox.TabIndex = 22;
             this.restoreCheckBox.UseVisualStyleBackColor = true;
+            this.restoreCheckBox.Visible = false;
             // 
             // LoginForm
             // 
@@ -205,6 +205,7 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label);
             this.Controls.Add(this.exitButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LoginForm";
             this.Text = "PEA Login";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_Closing);
