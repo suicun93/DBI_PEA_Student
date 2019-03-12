@@ -15,9 +15,9 @@ namespace DBI_PE_Submit_Tool
         private List<RichTextBox> ListAnswer = new List<RichTextBox>();
         private Submition submition;
         // Merge draft and submit to 1 method with a variable named "forDraft"
-        private bool forDraft = true, forSubmit = false; 
+        private bool forDraft = true, forSubmit = false;
         // Make student preview their answers before submitting
-        private bool previewed = false; 
+        private bool previewed = false;
         public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
 
         public int QuestionNumber { get; set; } = 10;
@@ -204,7 +204,7 @@ namespace DBI_PE_Submit_Tool
                 draftStatusLabel.Text = "Draft Status: N/A";
                 draftStatusLabel.ForeColor = Color.Red;
             }
-            
+
         }
 
         private void handleSubmit()
@@ -217,8 +217,12 @@ namespace DBI_PE_Submit_Tool
             if (result)
             {
                 // Change UI Draft Status UI to submit success
-                draftStatusLabel.Text = "Submit Status: Success";
-                draftStatusLabel.ForeColor = Color.Green;
+                draftStatusLabel.Invoke((MethodInvoker)delegate
+               {
+                   draftStatusLabel.Text = "Submit Status: Success";
+                   draftStatusLabel.ForeColor = Color.Green;
+
+               });
                 MessageBox.Show(submition.StudentID + " have submitted something");
             }
         }
