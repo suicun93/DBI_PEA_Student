@@ -57,6 +57,7 @@
     <Compile Include="Common\Constant.cs" />
     <Compile Include="Common\Download.cs" />
     <Compile Include="Common\SecureJsonSerializer.cs" />
+    <Compile Include="Entity\ResponseData.cs" />
     <Compile Include="Model\Submition.cs" />
     <Compile Include="UI\ClientForm.cs">
       <SubType>Form</SubType>
@@ -102,8 +103,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Network\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

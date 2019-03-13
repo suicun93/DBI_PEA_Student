@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
+using DBI_PE_Submit_Tool.Entity;
 using DBI_PE_Submit_Tool.Model;
 using DBI_PE_Submit_Tool.Common;
-using System.Threading;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -20,21 +21,23 @@ namespace DBI_PE_Submit_Tool
         private bool previewed = false;
         public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
 
-        public int QuestionNumber { get; set; } = 10;
+        //public int QuestionNumber { get; set; } = 10;
 
-        private string Token;
+        private ResponseData json;
+        private Int32 remainingTime;
 
-        public ClientForm(string examCode, string PaperNo, string StudentName, string token, bool restored)
+        public ClientForm(string examCode, string PaperNo, string StudentName, ResponseData _json, bool restored)
         {
             InitializeComponent();
-            if (String.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName) || String.IsNullOrEmpty(token))
+            if (String.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName))
             {
                 MessageBox.Show("Empty Information");
                 Application.Exit();
             }
             else
             {
-                Token = token;
+                this.json = _json;
+                SetupTimer();
                 // TODO: Call API to get question here!
 
                 // Now I mock up an url to download (an image from w3school)
@@ -43,7 +46,7 @@ namespace DBI_PE_Submit_Tool
                 studentLabel.Text = StudentName;
                 paperNoLabel.Text = PaperNo;
                 examCodeLabel.Text = examCode;
-                submition = new Submition(examCode, StudentName, PaperNo, Token);
+                submition = new Submition(examCode, StudentName, PaperNo, json.Token);
                 submition.register();
 
                 SetupTab();
@@ -51,11 +54,40 @@ namespace DBI_PE_Submit_Tool
             }
         }
 
+        private void SetupTimer()
+        {
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = 1000;
+            timer.Start();
+
+            Int32 now = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            remainingTime = json.Exp - now;
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (remainingTime > 0)
+            {
+                remainingTime--;
+                timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
+            } else
+            {
+                //MessageBox.Show("Time out!");
+                timeLabel.Text = "00:00:00";
+                // Disable all controls.
+                foreach (Control c in this.Controls)
+                {
+                    c.Enabled = false;
+                }
+            }
+        }
+
         private void SetupTab()
         {
             tabBar.TabPages.Clear();
 
-            for (int i = 0; i < QuestionNumber; i++)
+            for (int i = 0; i < json.QuestionNumber; i++)
             {
                 string title = "" + (i + 1);
                 TabPage tab = new TabPage(title);
@@ -74,7 +106,7 @@ namespace DBI_PE_Submit_Tool
         /// </summary>
         private void SetupUI(bool restored)
         {
-            for (int i = 0; i < QuestionNumber; i++)
+            for (int i = 0; i < json.QuestionNumber; i++)
             {
                 RichTextBox box = (RichTextBox)tabBar.TabPages[i].Controls["textBox"];
                 ListAnswer.Add(box);
@@ -85,7 +117,7 @@ namespace DBI_PE_Submit_Tool
             {
                 // If student continue from break point, restore answers for them
                 submition.Restore();
-                for (int i = 0; i < QuestionNumber; i++)
+                for (int i = 0; i < json.QuestionNumber; i++)
                 {
                     ListAnswer[i].Text = submition.ListAnswer[i];
                 }
@@ -131,7 +163,7 @@ namespace DBI_PE_Submit_Tool
         private void DownloadMaterialButton_Click(object sender, EventArgs e)
         {
             //Download.DownloadFrom(UrlDBToDownload, Token , locationMaterialTextBox);
-            Download.PostDownloadMaterial(UrlDBToDownload, Token);
+            Download.PostDownloadMaterial(UrlDBToDownload, json.Token);
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
@@ -225,6 +257,14 @@ namespace DBI_PE_Submit_Tool
                });
                 MessageBox.Show(submition.StudentID + " have submitted something");
             }
+        }
+
+        private void fontSize_ValueChanged(object sender, EventArgs e)
+        {
+            foreach (RichTextBox box in ListAnswer)
+            {
+                box.Font = new Font(box.Font.FontFamily, (int)fontSize.Value);
+            }    
         }
 
         /// <summary>

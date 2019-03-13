@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 
 using DBI_PE_Submit_Tool.Common;
+using DBI_PE_Submit_Tool.Entity;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -16,7 +17,8 @@ namespace DBI_PE_Submit_Tool
         private string Domain { get; set; }
 
         private string apiUrl = Constant.API_URL;
-        private string token = "";
+
+        private ResponseData json;
 
         public LoginForm()
         {
@@ -29,7 +31,7 @@ namespace DBI_PE_Submit_Tool
             {
                 if (loginSuccess())
                 {
-                    ClientForm clientForm = new ClientForm(Examcode, PaperNo, Username, token, restored: restoreCheckBox.Checked);
+                    ClientForm clientForm = new ClientForm(Examcode, PaperNo, Username, json, restored: restoreCheckBox.Checked);
                     clientForm.Show();
                     this.Hide();
                 }
@@ -83,13 +85,8 @@ namespace DBI_PE_Submit_Tool
 
                         byte[] responseBytes = client.UploadValues(uri, "POST", parameters);
                         string responseBody = System.Text.Encoding.UTF8.GetString(responseBytes);
-
-                        var definition = new { Token = "" };
-                        var json = JsonConvert.DeserializeAnonymousType(responseBody, definition);
-                        token = json.Token;
-
-                        //MessageBox.Show(json.Token);
-
+                        json = JsonConvert.DeserializeObject<ResponseData>(responseBody);
+                        
                         return true;
                     }
                     catch (Exception e)
@@ -105,11 +102,6 @@ namespace DBI_PE_Submit_Tool
         private void LoginForm_Closing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void usernameTextBox_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

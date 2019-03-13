@@ -58,12 +58,14 @@
             this.q9RichTextBox = new System.Windows.Forms.RichTextBox();
             this.q10Tab = new System.Windows.Forms.TabPage();
             this.q10RichTextBox = new System.Windows.Forms.RichTextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.locationMaterialTextBox = new System.Windows.Forms.TextBox();
             this.readyToFinishCheckBox = new System.Windows.Forms.CheckBox();
             this.submitButton = new System.Windows.Forms.Button();
             this.draftStatusLabel = new System.Windows.Forms.Label();
             this.previewButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.fontSize = new System.Windows.Forms.NumericUpDown();
             this.tabBar.SuspendLayout();
             this.q1Tab.SuspendLayout();
             this.q2Tab.SuspendLayout();
@@ -75,6 +77,7 @@
             this.q8Tab.SuspendLayout();
             this.q9Tab.SuspendLayout();
             this.q10Tab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSize)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -83,9 +86,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(203, 31);
+            this.label1.Size = new System.Drawing.Size(210, 31);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Submit Solution";
+            this.label1.Text = "Submit Answers";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // label2
@@ -120,7 +123,7 @@
             // 
             // helpButton
             // 
-            this.helpButton.Location = new System.Drawing.Point(18, 396);
+            this.helpButton.Location = new System.Drawing.Point(17, 427);
             this.helpButton.Name = "helpButton";
             this.helpButton.Size = new System.Drawing.Size(75, 23);
             this.helpButton.TabIndex = 5;
@@ -186,10 +189,10 @@
             this.tabBar.Controls.Add(this.q8Tab);
             this.tabBar.Controls.Add(this.q9Tab);
             this.tabBar.Controls.Add(this.q10Tab);
-            this.tabBar.Location = new System.Drawing.Point(18, 163);
+            this.tabBar.Location = new System.Drawing.Point(18, 161);
             this.tabBar.Name = "tabBar";
             this.tabBar.SelectedIndex = 0;
-            this.tabBar.Size = new System.Drawing.Size(750, 217);
+            this.tabBar.Size = new System.Drawing.Size(750, 259);
             this.tabBar.TabIndex = 10;
             // 
             // q1Tab
@@ -198,16 +201,17 @@
             this.q1Tab.Location = new System.Drawing.Point(4, 22);
             this.q1Tab.Name = "q1Tab";
             this.q1Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.q1Tab.Size = new System.Drawing.Size(742, 191);
+            this.q1Tab.Size = new System.Drawing.Size(742, 233);
             this.q1Tab.TabIndex = 0;
             this.q1Tab.Text = "Q1";
             this.q1Tab.UseVisualStyleBackColor = true;
             // 
             // q1RichTextBox
             // 
-            this.q1RichTextBox.Location = new System.Drawing.Point(0, 0);
+            this.q1RichTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.q1RichTextBox.Location = new System.Drawing.Point(0, 1);
             this.q1RichTextBox.Name = "q1RichTextBox";
-            this.q1RichTextBox.Size = new System.Drawing.Size(742, 195);
+            this.q1RichTextBox.Size = new System.Drawing.Size(742, 237);
             this.q1RichTextBox.TabIndex = 1;
             this.q1RichTextBox.Text = "";
             // 
@@ -374,29 +378,10 @@
             this.q10RichTextBox.TabIndex = 0;
             this.q10RichTextBox.Text = "";
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(244, 127);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Save at:";
-            this.label5.Visible = false;
-            // 
-            // locationMaterialTextBox
-            // 
-            this.locationMaterialTextBox.Enabled = false;
-            this.locationMaterialTextBox.Location = new System.Drawing.Point(307, 123);
-            this.locationMaterialTextBox.Name = "locationMaterialTextBox";
-            this.locationMaterialTextBox.Size = new System.Drawing.Size(457, 20);
-            this.locationMaterialTextBox.TabIndex = 12;
-            this.locationMaterialTextBox.Visible = false;
-            // 
             // readyToFinishCheckBox
             // 
             this.readyToFinishCheckBox.AutoSize = true;
-            this.readyToFinishCheckBox.Location = new System.Drawing.Point(459, 399);
+            this.readyToFinishCheckBox.Location = new System.Drawing.Point(458, 430);
             this.readyToFinishCheckBox.Name = "readyToFinishCheckBox";
             this.readyToFinishCheckBox.Size = new System.Drawing.Size(175, 17);
             this.readyToFinishCheckBox.TabIndex = 13;
@@ -405,7 +390,7 @@
             // 
             // submitButton
             // 
-            this.submitButton.Location = new System.Drawing.Point(658, 396);
+            this.submitButton.Location = new System.Drawing.Point(657, 427);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(106, 23);
             this.submitButton.TabIndex = 14;
@@ -418,7 +403,7 @@
             this.draftStatusLabel.AutoSize = true;
             this.draftStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.draftStatusLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.draftStatusLabel.Location = new System.Drawing.Point(198, 400);
+            this.draftStatusLabel.Location = new System.Drawing.Point(197, 431);
             this.draftStatusLabel.Name = "draftStatusLabel";
             this.draftStatusLabel.Size = new System.Drawing.Size(112, 15);
             this.draftStatusLabel.TabIndex = 16;
@@ -426,7 +411,7 @@
             // 
             // previewButton
             // 
-            this.previewButton.Location = new System.Drawing.Point(112, 396);
+            this.previewButton.Location = new System.Drawing.Point(111, 427);
             this.previewButton.Name = "previewButton";
             this.previewButton.Size = new System.Drawing.Size(75, 23);
             this.previewButton.TabIndex = 17;
@@ -434,17 +419,73 @@
             this.previewButton.UseVisualStyleBackColor = true;
             this.previewButton.Click += new System.EventHandler(this.PreviewButton_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(389, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(86, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Time Remaining:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.timeLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.timeLabel.Location = new System.Drawing.Point(496, 45);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(120, 31);
+            this.timeLabel.TabIndex = 19;
+            this.timeLabel.Text = "00:00:00";
+            this.timeLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(421, 127);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(54, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Font Size:";
+            // 
+            // fontSize
+            // 
+            this.fontSize.Location = new System.Drawing.Point(502, 124);
+            this.fontSize.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.fontSize.Minimum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.fontSize.Name = "fontSize";
+            this.fontSize.Size = new System.Drawing.Size(46, 20);
+            this.fontSize.TabIndex = 21;
+            this.fontSize.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.fontSize.ValueChanged += new System.EventHandler(this.fontSize_ValueChanged);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(791, 434);
+            this.ClientSize = new System.Drawing.Size(782, 461);
+            this.Controls.Add(this.fontSize);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.timeLabel);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.previewButton);
             this.Controls.Add(this.draftStatusLabel);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.readyToFinishCheckBox);
-            this.Controls.Add(this.locationMaterialTextBox);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.tabBar);
             this.Controls.Add(this.downloadMaterialButton);
             this.Controls.Add(this.paperNoLabel);
@@ -469,6 +510,7 @@
             this.q8Tab.ResumeLayout(false);
             this.q9Tab.ResumeLayout(false);
             this.q10Tab.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fontSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -505,12 +547,14 @@
         private System.Windows.Forms.RichTextBox q8RichTextBox;
         private System.Windows.Forms.RichTextBox q9RichTextBox;
         private System.Windows.Forms.RichTextBox q10RichTextBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox locationMaterialTextBox;
         protected internal System.Windows.Forms.CheckBox readyToFinishCheckBox;
         protected internal System.Windows.Forms.Button submitButton;
         protected internal System.Windows.Forms.Button helpButton;
         private System.Windows.Forms.Label draftStatusLabel;
         private System.Windows.Forms.Button previewButton;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown fontSize;
     }
 }
