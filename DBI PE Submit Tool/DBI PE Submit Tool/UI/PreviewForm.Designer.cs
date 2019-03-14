@@ -40,14 +40,14 @@
             this.previewTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.previewTextBox.Location = new System.Drawing.Point(12, 12);
             this.previewTextBox.Name = "previewTextBox";
-            this.previewTextBox.Size = new System.Drawing.Size(458, 373);
+            this.previewTextBox.Size = new System.Drawing.Size(404, 373);
             this.previewTextBox.TabIndex = 0;
             this.previewTextBox.Text = "";
             // 
             // finishPreviewButton
             // 
             this.finishPreviewButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.finishPreviewButton.Location = new System.Drawing.Point(189, 399);
+            this.finishPreviewButton.Location = new System.Drawing.Point(162, 399);
             this.finishPreviewButton.Name = "finishPreviewButton";
             this.finishPreviewButton.Size = new System.Drawing.Size(105, 23);
             this.finishPreviewButton.TabIndex = 1;
@@ -59,11 +59,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 436);
+            this.ClientSize = new System.Drawing.Size(428, 436);
             this.Controls.Add(this.finishPreviewButton);
             this.Controls.Add(this.previewTextBox);
             this.Name = "PreviewForm";
             this.Text = "Preview";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PreviewForm_FormClosing);
             this.ResumeLayout(false);
 
         }

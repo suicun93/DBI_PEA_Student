@@ -28,7 +28,7 @@ namespace DBI_PE_Submit_Tool
             {
                 if (LoginSuccess)
                 {
-                    ClientForm clientForm = new ClientForm(Examcode.Trim(), PaperNo.Trim(), Username.Trim(), json, restored: restoreCheckBox.Checked);
+                    ClientForm clientForm = new ClientForm(Examcode.Trim(), PaperNo.Trim(), Username.Trim(), json, restoreCheckBox.Checked);
                     clientForm.Show();
                     Hide();
                 }
@@ -96,9 +96,6 @@ namespace DBI_PE_Submit_Tool
         }
 
         // When student quit.
-        private void LoginForm_Closing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
+        private void LoginForm_Closing(object sender, FormClosingEventArgs e) => Application.Exit();
     }
 }

@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace DBI_PE_Submit_Tool.UI
 {
@@ -23,6 +22,12 @@ namespace DBI_PE_Submit_Tool.UI
         }
 
         private void FinishPreviewButton_Click(object sender, EventArgs e)
+        {
+            completion();
+            Dispose();
+        }
+
+        private void PreviewForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             completion();
             Dispose();

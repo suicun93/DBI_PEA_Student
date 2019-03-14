@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using EncryptData;
 using System.IO;
 using DBI_PE_Submit_Tool.Model;
-using Microsoft.SqlServer.TransactSql.ScriptDom;
 using Newtonsoft.Json;
 
 namespace DBI_PE_Submit_Tool.Common
@@ -86,7 +85,7 @@ namespace DBI_PE_Submit_Tool.Common
             }
         }
 
-        string filePath = "";
+        readonly string filePath = "";
 
         /// <summary>
         ///     Constructor

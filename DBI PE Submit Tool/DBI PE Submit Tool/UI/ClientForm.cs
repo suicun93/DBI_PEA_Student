@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using System.Threading;
 using DBI_PE_Submit_Tool.Entity;
 using DBI_PE_Submit_Tool.Model;
 using DBI_PE_Submit_Tool.Common;
 using DBI_PE_Submit_Tool.UI;
-using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -24,15 +22,14 @@ namespace DBI_PE_Submit_Tool
         private bool previewed = false;
         public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
 
-        //public int QuestionNumber { get; set; } = 10;
-
+        System.Windows.Forms.Timer timer = null;
         private ResponseData json;
         private int remainingTime;
 
         public ClientForm(string examCode, string PaperNo, string StudentName, ResponseData _json, bool restored)
         {
             InitializeComponent();
-            if (string.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName))
+            if (string.IsNullOrEmpty(examCode) || string.IsNullOrEmpty(PaperNo) || string.IsNullOrEmpty(StudentName))
             {
                 MessageBox.Show("Empty Information");
                 Application.Exit();
@@ -41,9 +38,8 @@ namespace DBI_PE_Submit_Tool
             {
                 json = _json;
                 SetupTimer();
-                // TODO: Call API to get question here!
 
-                // Now I mock up an url to download (an image from w3school)
+                // Now I hard code a link to call api get material.
                 UrlDBToDownload = Constant.API_URL + "/material";
 
                 studentLabel.Text = StudentName;
@@ -59,12 +55,12 @@ namespace DBI_PE_Submit_Tool
 
         private void SetupTimer()
         {
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer = new System.Windows.Forms.Timer();
             timer.Tick += Timer_Tick;
             timer.Interval = 1000;
             timer.Start();
 
-            int now = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            int now = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             remainingTime = json.Exp - now;
         }
 
@@ -73,18 +69,15 @@ namespace DBI_PE_Submit_Tool
             if (remainingTime > 0)
             {
                 remainingTime--;
-                timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
+                timeLabel.Invoke((MethodInvoker)(() =>
+                {
+                    timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
+                }));
             }
             else
             {
-                //MessageBox.Show("Time out!");
-                timeLabel.Text = "00:00:00";
-                // Submit
-                previewed = true;
+                // Make student to submit without preview
                 SumUpAnswer(forSubmit);
-                // Disable all controls.
-                foreach (Control c in Controls)
-                    c.Enabled = false;
             }
         }
 
@@ -102,7 +95,6 @@ namespace DBI_PE_Submit_Tool
                     Name = "textBox",
                     Dock = DockStyle.Fill
                 });
-
                 tabBar.TabPages.Add(tab);
             }
         }
@@ -124,22 +116,15 @@ namespace DBI_PE_Submit_Tool
                 // If student continue from break point, restore answers for them
                 submition.Restore();
                 for (int i = 0; i < json.QuestionNumber; i++)
-                {
                     ListAnswer[i].Text = submition.ListAnswer[i];
-                }
             }
 
             // Add event to draft every time answers changed
-            for (int i = 0; i < ListAnswer.Count; i++)
-            {
-                ListAnswer[i].TextChanged += new EventHandler(DraftAnswers);
-            }
+            foreach (RichTextBox textBox in ListAnswer)
+                textBox.TextChanged += new EventHandler(DraftAnswers);
         }
 
-        private void HelpButton_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("You should preview before submitting.");
-        }
+        private void HelpButton_Click(object sender, EventArgs e) => MessageBox.Show("You should preview before submitting.");
 
         /// <summary>
         ///     Preview to re-check 10 answers
@@ -157,9 +142,8 @@ namespace DBI_PE_Submit_Tool
                 string answers = "";
                 foreach (string answer in submition.ListAnswer)
                 {
-                    
                     i++;
-                    answers += "Question " + i + "\n\n" + (string.IsNullOrEmpty(answer) ? "(empty)" : FormatSqlCode(answer))
+                    answers += "Question " + i + "\n\n" + (string.IsNullOrEmpty(answer) ? "(empty)" : answer)
                         + "\n\n================================================\n\n";
                 }
                 // Show preview form.
@@ -167,25 +151,6 @@ namespace DBI_PE_Submit_Tool
             }
         }
 
-        public static string FormatSqlCode(string query)
-        {
-            var parser = new TSql110Parser(false);
-            IList<ParseError> errors;
-            var parsedQuery = parser.Parse(new StringReader(query), out errors);
-
-            var generator = new Sql110ScriptGenerator(new SqlScriptGeneratorOptions()
-            {
-                KeywordCasing = KeywordCasing.Uppercase,
-                IncludeSemicolons = true,
-                NewLineBeforeFromClause = true,
-                NewLineBeforeOrderByClause = true,
-                NewLineBeforeWhereClause = true,
-                AlignClauseBodies = false
-            });
-            string formattedQuery;
-            generator.GenerateScript(parsedQuery, out formattedQuery);
-            return formattedQuery;
-        }
 
         private void DownloadMaterialButton_Click(object sender, EventArgs e) =>
             Download.PostDownloadMaterial(UrlDBToDownload, json.Token);
@@ -217,15 +182,16 @@ namespace DBI_PE_Submit_Tool
         private void SumUpAnswer(bool forDraft)
         {
             // Change UI Draft Status UI 
-            draftStatusLabel.Text = "Draft Status: N/A";
-            draftStatusLabel.ForeColor = Color.Red;
+            draftStatusLabel.Invoke((MethodInvoker)(() =>
+            {
+                draftStatusLabel.Text = "Draft Status: N/A";
+                draftStatusLabel.ForeColor = Color.Red;
+            }));
+
             // Process
-            previewed = false;
             submition.ClearAnswer();
             foreach (RichTextBox richTextBox in ListAnswer)
-            {
                 submition.AddAnswer(richTextBox.Text);
-            }
             try
             {
                 submition.SaveToLocal();
@@ -234,50 +200,53 @@ namespace DBI_PE_Submit_Tool
                     // TODO: Call API to draft all answer, exam code, student's rollID, paper number
                     // CallAPIToDraft()
                     // Change UI Draft Status UI to draft success
-                    draftStatusLabel.Text = "Draft Status: Success";
-                    draftStatusLabel.ForeColor = Color.Green;
+                    previewed = false;
+                    draftStatusLabel.Invoke((MethodInvoker)(() =>
+                    {
+                        draftStatusLabel.Text = "Draft Status: Success";
+                        draftStatusLabel.ForeColor = Color.Green;
+                    }));
                 }
                 else
                 {
-                    // TODO: Call API to submit all answer, exam code, studentID, paper number
-
-                    // CallAPIToSubmit()
-                    // Make some time-out here!
+                    // Call API
                     Thread t = new Thread(HandleSubmit);
                     t.Start();
-
-                    // Change UI Draft Status UI to submit success
-                    //draftStatusLabel.Text = "Submit Status: Success";
-                    //draftStatusLabel.ForeColor = Color.Green;
-                    //MessageBox.Show(submition.StudentID + " have submitted something");
                 }
             }
             catch (Exception)
             {
                 // Change UI Draft Status UI 
-                draftStatusLabel.Text = "Draft Status: N/A";
-                draftStatusLabel.ForeColor = Color.Red;
+                draftStatusLabel.Invoke((MethodInvoker)(() =>
+                {
+                    draftStatusLabel.Text = "Draft Status: N/A";
+                    draftStatusLabel.ForeColor = Color.Red;
+                }));
             }
 
         }
 
         private void HandleSubmit()
         {
-            void doAfterSubmit(string text)
+
+            bool result = submition.Submit((text) =>
             {
-                MessageBox.Show(text);
-            }
-            bool result = submition.Submit(doAfterSubmit);
+                Console.WriteLine(text);
+            });
             if (result)
             {
+                // Stop time when submit successfully
+                timer?.Stop();
                 // Change UI Draft Status UI to submit success
                 draftStatusLabel.Invoke((MethodInvoker)delegate
                {
                    draftStatusLabel.Text = "Submit Status: Success";
                    draftStatusLabel.ForeColor = Color.Green;
-
                });
-                MessageBox.Show(submition.StudentID + " have submitted something");
+                // Disable all controls.
+                foreach (Control c in Controls)
+                    if (c is Button)
+                        c.Enabled = false;
             }
         }
 
