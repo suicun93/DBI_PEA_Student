@@ -34,6 +34,9 @@
             // 
             // previewTextBox
             // 
+            this.previewTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.previewTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.previewTextBox.Location = new System.Drawing.Point(12, 12);
             this.previewTextBox.Name = "previewTextBox";
@@ -43,6 +46,7 @@
             // 
             // finishPreviewButton
             // 
+            this.finishPreviewButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.finishPreviewButton.Location = new System.Drawing.Point(189, 399);
             this.finishPreviewButton.Name = "finishPreviewButton";
             this.finishPreviewButton.Size = new System.Drawing.Size(105, 23);

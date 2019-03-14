@@ -28,7 +28,7 @@ namespace DBI_PE_Submit_Tool
             {
                 if (LoginSuccess)
                 {
-                    ClientForm clientForm = new ClientForm(Examcode, PaperNo, Username, json, restored: restoreCheckBox.Checked);
+                    ClientForm clientForm = new ClientForm(Examcode.Trim(), PaperNo.Trim(), Username.Trim(), json, restored: restoreCheckBox.Checked);
                     clientForm.Show();
                     Hide();
                 }

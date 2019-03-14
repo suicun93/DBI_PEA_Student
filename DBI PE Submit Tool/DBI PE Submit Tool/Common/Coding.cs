@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using EncryptData;
 using System.IO;
 using DBI_PE_Submit_Tool.Model;
+using Microsoft.SqlServer.TransactSql.ScriptDom;
 using Newtonsoft.Json;
 
 namespace DBI_PE_Submit_Tool.Common
@@ -131,5 +132,7 @@ namespace DBI_PE_Submit_Tool.Common
             for (int i = 0; i < str.Length; i += maxChunkSize)
                 yield return str.Substring(i, Math.Min(maxChunkSize, str.Length - i));
         }
+
+        
     }
 }

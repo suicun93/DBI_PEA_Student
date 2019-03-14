@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using System.Threading;
 using DBI_PE_Submit_Tool.Entity;
 using DBI_PE_Submit_Tool.Model;
 using DBI_PE_Submit_Tool.Common;
 using DBI_PE_Submit_Tool.UI;
+using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -155,13 +157,34 @@ namespace DBI_PE_Submit_Tool
                 string answers = "";
                 foreach (string answer in submition.ListAnswer)
                 {
+                    
                     i++;
-                    answers += "Question " + i + "\n\n" + (string.IsNullOrEmpty(answer) ? "(empty)" : answer)
+                    answers += "Question " + i + "\n\n" + (string.IsNullOrEmpty(answer) ? "(empty)" : FormatSqlCode(answer))
                         + "\n\n================================================\n\n";
                 }
                 // Show preview form.
                 new PreviewForm(completion: () => { previewed = true; }, answers: answers).Show();
             }
+        }
+
+        public static string FormatSqlCode(string query)
+        {
+            var parser = new TSql110Parser(false);
+            IList<ParseError> errors;
+            var parsedQuery = parser.Parse(new StringReader(query), out errors);
+
+            var generator = new Sql110ScriptGenerator(new SqlScriptGeneratorOptions()
+            {
+                KeywordCasing = KeywordCasing.Uppercase,
+                IncludeSemicolons = true,
+                NewLineBeforeFromClause = true,
+                NewLineBeforeOrderByClause = true,
+                NewLineBeforeWhereClause = true,
+                AlignClauseBodies = false
+            });
+            string formattedQuery;
+            generator.GenerateScript(parsedQuery, out formattedQuery);
+            return formattedQuery;
         }
 
         private void DownloadMaterialButton_Click(object sender, EventArgs e) =>
