@@ -209,26 +209,25 @@ namespace DBI_PE_Submit_Tool
                 }
                 else
                 {
-                    // Call API
+                    // Submit by calling API
                     Thread t = new Thread(HandleSubmit);
                     t.Start();
                 }
             }
             catch (Exception)
             {
-                // Change UI Draft Status UI 
+                // Change UI Draft Status UI failed
                 draftStatusLabel.Invoke((MethodInvoker)(() =>
                 {
-                    draftStatusLabel.Text = "Draft Status: N/A";
+                    draftStatusLabel.Text = forDraft ? "Draft" : "Submit" + " Status: N/A";
                     draftStatusLabel.ForeColor = Color.Red;
                 }));
             }
-
         }
 
         private void HandleSubmit()
         {
-
+            // Call API to submit
             bool result = submition.Submit((text) =>
             {
                 Console.WriteLine(text);
@@ -237,31 +236,33 @@ namespace DBI_PE_Submit_Tool
             {
                 // Stop time when submit successfully
                 timer?.Stop();
+
                 // Change UI Draft Status UI to submit success
-                draftStatusLabel.Invoke((MethodInvoker)delegate
-               {
-                   draftStatusLabel.Text = "Submit Status: Success";
-                   draftStatusLabel.ForeColor = Color.Green;
-               });
-				// Disable all controls.
-				foreach (Control item in Controls)
-					if (item is Button)
-						item.Invoke((MethodInvoker)(()=> {
-							item.Enabled = false;
-						}));
+                draftStatusLabel.Invoke((MethodInvoker)(() =>
+                {
+                    draftStatusLabel.Text = "Submit Status: Success";
+                    draftStatusLabel.ForeColor = Color.Green;
+                }));
 
-				foreach (TabPage item in tabBar.TabPages)
-				{
-					foreach (Control bth in item.Controls)
-					{
-						bth.Invoke((MethodInvoker)(() => {
-							bth.Enabled = false;
-						}));
-					}
-					
-				}
-
-			}
+                // Disable all controls.
+                foreach (Control item in Controls)
+                    if (item is Button)
+                        item.Invoke((MethodInvoker)(() =>
+                        {
+                            item.Enabled = false;
+                        }));
+                foreach (TabPage item in tabBar.TabPages)
+                {
+                    foreach (Control bth in item.Controls)
+                        bth.Invoke((MethodInvoker)(() =>
+                        {
+                            bth.Enabled = false;
+                        }));
+                }
+                readyToFinishCheckBox.Enabled = false;
+            }
+            else
+                MessageBox.Show("Submit failed.");
         }
 
         private void FontSize_ValueChanged(object sender, EventArgs e)
