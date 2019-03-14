@@ -69,3 +69,4 @@ C:\dev\Capstone\DBI_PEA_Studen\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\D
 C:\dev\Capstone\DBI_PEA_Studen\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.csproj.CopyComplete
 C:\dev\Capstone\DBI_PEA_Studen\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.exe
 C:\dev\Capstone\DBI_PEA_Studen\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.pdb
+C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.UI.PreviewForm.resources

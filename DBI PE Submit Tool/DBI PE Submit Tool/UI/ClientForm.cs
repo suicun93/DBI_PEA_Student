@@ -6,6 +6,7 @@ using System.Threading;
 using DBI_PE_Submit_Tool.Entity;
 using DBI_PE_Submit_Tool.Model;
 using DBI_PE_Submit_Tool.Common;
+using DBI_PE_Submit_Tool.UI;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -24,19 +25,19 @@ namespace DBI_PE_Submit_Tool
         //public int QuestionNumber { get; set; } = 10;
 
         private ResponseData json;
-        private Int32 remainingTime;
+        private int remainingTime;
 
         public ClientForm(string examCode, string PaperNo, string StudentName, ResponseData _json, bool restored)
         {
             InitializeComponent();
-            if (String.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName))
+            if (string.IsNullOrEmpty(examCode) || String.IsNullOrEmpty(PaperNo) || String.IsNullOrEmpty(StudentName))
             {
                 MessageBox.Show("Empty Information");
                 Application.Exit();
             }
             else
             {
-                this.json = _json;
+                json = _json;
                 SetupTimer();
                 // TODO: Call API to get question here!
 
@@ -47,7 +48,7 @@ namespace DBI_PE_Submit_Tool
                 paperNoLabel.Text = PaperNo;
                 examCodeLabel.Text = examCode;
                 submition = new Submition(examCode, StudentName, PaperNo, json.Token);
-                submition.register();
+                submition.Register();
 
                 SetupTab();
                 SetupUI(restored);
@@ -61,7 +62,7 @@ namespace DBI_PE_Submit_Tool
             timer.Interval = 1000;
             timer.Start();
 
-            Int32 now = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            int now = (int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
             remainingTime = json.Exp - now;
         }
 
@@ -71,15 +72,17 @@ namespace DBI_PE_Submit_Tool
             {
                 remainingTime--;
                 timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
-            } else
+            }
+            else
             {
                 //MessageBox.Show("Time out!");
                 timeLabel.Text = "00:00:00";
+                // Submit
+                previewed = true;
+                SumUpAnswer(forSubmit);
                 // Disable all controls.
-                foreach (Control c in this.Controls)
-                {
+                foreach (Control c in Controls)
                     c.Enabled = false;
-                }
             }
         }
 
@@ -92,10 +95,11 @@ namespace DBI_PE_Submit_Tool
                 string title = "" + (i + 1);
                 TabPage tab = new TabPage(title);
 
-                RichTextBox textBox = new RichTextBox();
-                textBox.Name = "textBox";
-                textBox.Dock = DockStyle.Fill;
-                tab.Controls.Add(textBox);
+                tab.Controls.Add(new RichTextBox
+                {
+                    Name = "textBox",
+                    Dock = DockStyle.Fill
+                });
 
                 tabBar.TabPages.Add(tab);
             }
@@ -143,28 +147,25 @@ namespace DBI_PE_Submit_Tool
             // List answers to preview
             submition.Restore();
             if (submition == null)
-            {
                 MessageBox.Show("Restore failed");
-            }
             else
             {
+                // SUm up answer to a string
                 int i = 0;
                 string answers = "";
                 foreach (string answer in submition.ListAnswer)
                 {
                     i++;
-                    answers += "Question " + i + "\n\t" + (String.IsNullOrEmpty(answer) ? "(empty)" : answer) + "\n";
+                    answers += "Question " + i + "\n\n" + (string.IsNullOrEmpty(answer) ? "(empty)" : answer)
+                        + "\n\n================================================\n\n";
                 }
-                MessageBox.Show(answers);
-                previewed = true;
+                // Show preview form.
+                new PreviewForm(completion: () => { previewed = true; }, answers: answers).Show();
             }
         }
 
-        private void DownloadMaterialButton_Click(object sender, EventArgs e)
-        {
-            //Download.DownloadFrom(UrlDBToDownload, Token , locationMaterialTextBox);
+        private void DownloadMaterialButton_Click(object sender, EventArgs e) =>
             Download.PostDownloadMaterial(UrlDBToDownload, json.Token);
-        }
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
@@ -180,11 +181,9 @@ namespace DBI_PE_Submit_Tool
         /// <summary>
         ///     Draft Student's answer every time they edit their answer
         /// </summary>
-        private void DraftAnswers(object sender, System.EventArgs e)
-        {
+        private void DraftAnswers(object sender, EventArgs e) =>
             // Get all answer
             SumUpAnswer(forDraft);
-        }
 
         /// <summary>
         ///     Sum Up Answers and save to local
@@ -221,7 +220,7 @@ namespace DBI_PE_Submit_Tool
 
                     // CallAPIToSubmit()
                     // Make some time-out here!
-                    Thread t = new Thread(handleSubmit);
+                    Thread t = new Thread(HandleSubmit);
                     t.Start();
 
                     // Change UI Draft Status UI to submit success
@@ -239,13 +238,13 @@ namespace DBI_PE_Submit_Tool
 
         }
 
-        private void handleSubmit()
+        private void HandleSubmit()
         {
             void doAfterSubmit(string text)
             {
                 MessageBox.Show(text);
             }
-            bool result = submition.submit(doAfterSubmit);
+            bool result = submition.Submit(doAfterSubmit);
             if (result)
             {
                 // Change UI Draft Status UI to submit success
@@ -259,20 +258,15 @@ namespace DBI_PE_Submit_Tool
             }
         }
 
-        private void fontSize_ValueChanged(object sender, EventArgs e)
+        private void FontSize_ValueChanged(object sender, EventArgs e)
         {
             foreach (RichTextBox box in ListAnswer)
-            {
                 box.Font = new Font(box.Font.FontFamily, (int)fontSize.Value);
-            }    
         }
 
         /// <summary>
         ///     Handle when user close window -> application will be closed. 
         /// </summary>
-        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
+        private void ClientForm_FormClosing(object sender, FormClosingEventArgs e) => Application.Exit();
     }
 }

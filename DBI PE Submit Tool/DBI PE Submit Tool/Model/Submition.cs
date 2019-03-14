@@ -18,8 +18,8 @@ namespace DBI_PE_Submit_Tool.Model
         [JsonIgnore]
         public SecureJsonSerializer<Submition> secureJsonSerializer;
 
-        private string apiUrl = Constant.API_URL;
-        private string Token;
+        private readonly string apiUrl = Constant.API_URL;
+        private readonly string Token;
 
         public Submition()
         {
@@ -35,25 +35,17 @@ namespace DBI_PE_Submit_Tool.Model
             ListAnswer = new List<string>();
         }
 
-        public void register()
+        public void Register()
         {
             var dir = ExamCode;
             if (!Directory.Exists(dir))
-            {
                 Directory.CreateDirectory(dir);
-            }
             secureJsonSerializer = new SecureJsonSerializer<Submition>(Path.Combine(dir, StudentID + ".dat"));
         }
 
-        public void AddAnswer(string answer)
-        {
-            ListAnswer.Add(answer);
-        }
+        public void AddAnswer(string answer) => ListAnswer.Add(answer);
 
-        public void ClearAnswer()
-        {
-            ListAnswer.Clear();
-        }
+        public void ClearAnswer() => ListAnswer.Clear();
 
         public void SaveToLocal()
         {
@@ -72,7 +64,7 @@ namespace DBI_PE_Submit_Tool.Model
         public delegate void DoAfterSubmit(string text);
 
         // call POST '/submit' api.
-        public bool submit(DoAfterSubmit doAfterSubmit)
+        public bool Submit(DoAfterSubmit doAfterSubmit)
         {
             string submitUrl = apiUrl + "/submit";
             Uri uri = new Uri(submitUrl);
@@ -81,12 +73,13 @@ namespace DBI_PE_Submit_Tool.Model
                 try
                 {
                     client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
-
-                    var parameters = new System.Collections.Specialized.NameValueCollection();
-                    parameters.Add("username", StudentID);
-                    parameters.Add("examCode", ExamCode);
-                    parameters.Add("paperNo", PaperNo);
-                    parameters.Add("token", Token);
+                    var parameters = new System.Collections.Specialized.NameValueCollection
+                    {
+                        { "username", StudentID },
+                        { "examCode", ExamCode },
+                        { "paperNo", PaperNo },
+                        { "token", Token }
+                    };
 
                     var data = JsonConvert.SerializeObject(this);
                     parameters.Add("answers", data);
@@ -95,7 +88,8 @@ namespace DBI_PE_Submit_Tool.Model
                     string responseBody = System.Text.Encoding.UTF8.GetString(responseBytes);
                     doAfterSubmit(responseBody);
                     return true;
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     doAfterSubmit(e.Message);
                 }
@@ -116,10 +110,10 @@ namespace DBI_PE_Submit_Tool.Model
                     {
                         submition = secureJsonSerializer.Load();
                         // Load successfully
-                        this.ListAnswer = new List<string>();
+                        ListAnswer = new List<string>();
                         foreach (var answer in submition.ListAnswer)
                         {
-                            this.ListAnswer.Add(answer);
+                            ListAnswer.Add(answer);
                         }
                     }
                     catch (Exception)
@@ -129,14 +123,12 @@ namespace DBI_PE_Submit_Tool.Model
                         // Create new list
                         for (int i = 0; i < 10; i++)
                         {
-                            this.ListAnswer.Add("");
+                            ListAnswer.Add("");
                         }
                     }
                 }
                 else
-                {
                     throw new Exception("No file was found");
-                }
             }
             catch (Exception e)
             {

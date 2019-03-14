@@ -63,7 +63,7 @@
             this.exitButton.TabIndex = 13;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
-            this.exitButton.Click += new System.EventHandler(this.btnExit_Click);
+            this.exitButton.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // label9
             // 
@@ -173,7 +173,7 @@
             this.loginButton.TabIndex = 21;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.btnLogin_Click);
+            this.loginButton.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
             // restoreCheckBox
             // 

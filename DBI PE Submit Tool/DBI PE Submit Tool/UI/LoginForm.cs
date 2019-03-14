@@ -20,25 +20,20 @@ namespace DBI_PE_Submit_Tool
 
         private ResponseData json;
 
-        public LoginForm()
-        {
-            InitializeComponent();
-        }
+        public LoginForm() => InitializeComponent();
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void BtnLogin_Click(object sender, EventArgs e)
         {
             try
             {
-                if (loginSuccess())
+                if (LoginSuccess)
                 {
                     ClientForm clientForm = new ClientForm(Examcode, PaperNo, Username, json, restored: restoreCheckBox.Checked);
                     clientForm.Show();
-                    this.Hide();
+                    Hide();
                 }
                 else
-                {
                     MessageBox.Show("Login Failed");
-                }
             }
             catch (Exception ex)
             {
@@ -47,55 +42,57 @@ namespace DBI_PE_Submit_Tool
         }
 
         // Button exit: Just exit now
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        private void BtnExit_Click(object sender, EventArgs e) => Application.Exit();
 
         // Button Login: Login method(mock up)
-        private bool loginSuccess()
+        private bool LoginSuccess
         {
-            Examcode = examCodeTextBox.Text;
-            PaperNo = paperNoTextBox.Text;
-            Username = usernameTextBox.Text;
-            Password = passwordTextBox.Text;
-            Domain = domainTextBox.Text;
-            if (String.IsNullOrEmpty(Examcode) ||
-                String.IsNullOrEmpty(PaperNo) ||
-                String.IsNullOrEmpty(Username) ||
-                String.IsNullOrEmpty(Password) ||
-                String.IsNullOrEmpty(Domain))
+            get
             {
-                throw new Exception("Not enough information");
-            }
-            else
-            {
-                // TODO: Call API to authorize but now It's hard to be true
-                string loginUrl = apiUrl + "/login";
-                Uri uri = new Uri(loginUrl);
-                using (WebClient client = new WebClient())
+                Examcode = examCodeTextBox.Text;
+                PaperNo = paperNoTextBox.Text;
+                Username = usernameTextBox.Text;
+                Password = passwordTextBox.Text;
+                Domain = domainTextBox.Text;
+                if (string.IsNullOrEmpty(Examcode) ||
+                    string.IsNullOrEmpty(PaperNo) ||
+                    string.IsNullOrEmpty(Username) ||
+                    string.IsNullOrEmpty(Password) ||
+                    string.IsNullOrEmpty(Domain))
                 {
-                    try
+                    throw new Exception("Not enough information");
+                }
+                else
+                {
+                    // TODO: Call API to authorize but now It's hard to be true
+                    string loginUrl = apiUrl + "/login";
+                    Uri uri = new Uri(loginUrl);
+                    using (WebClient client = new WebClient())
                     {
-                        client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                        try
+                        {
+                            client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
 
-                        var parameters = new System.Collections.Specialized.NameValueCollection();
-                        parameters.Add("username", Username);
-                        parameters.Add("hashedPassword", Password);
+                            var parameters = new System.Collections.Specialized.NameValueCollection
+                        {
+                            { "username", Username },
+                            { "hashedPassword", Password }
+                        };
 
-                        byte[] responseBytes = client.UploadValues(uri, "POST", parameters);
-                        string responseBody = System.Text.Encoding.UTF8.GetString(responseBytes);
-                        json = JsonConvert.DeserializeObject<ResponseData>(responseBody);
-                        
-                        return true;
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show("Error!");
+                            byte[] responseBytes = client.UploadValues(uri, "POST", parameters);
+                            string responseBody = System.Text.Encoding.UTF8.GetString(responseBytes);
+                            json = JsonConvert.DeserializeObject<ResponseData>(responseBody);
+
+                            return true;
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Error!\n" + e.Message);
+                        }
                     }
                 }
+                return false;
             }
-            return false;
         }
 
         // When student quit.

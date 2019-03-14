@@ -471,7 +471,7 @@
             0,
             0,
             0});
-            this.fontSize.ValueChanged += new System.EventHandler(this.fontSize_ValueChanged);
+            this.fontSize.ValueChanged += new System.EventHandler(this.FontSize_ValueChanged);
             // 
             // ClientForm
             // 
