@@ -40,6 +40,7 @@
             this.previewTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.previewTextBox.Location = new System.Drawing.Point(12, 12);
             this.previewTextBox.Name = "previewTextBox";
+            this.previewTextBox.ReadOnly = true;
             this.previewTextBox.Size = new System.Drawing.Size(404, 373);
             this.previewTextBox.TabIndex = 0;
             this.previewTextBox.Text = "";
