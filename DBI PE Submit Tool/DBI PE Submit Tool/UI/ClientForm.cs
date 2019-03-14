@@ -245,7 +245,7 @@ namespace DBI_PE_Submit_Tool
                });
                 // Disable all controls.
                 foreach (Control c in Controls)
-                    if (c is Button)
+                    if (c is Button || c is RichTextBox)
                         c.Enabled = false;
             }
         }
