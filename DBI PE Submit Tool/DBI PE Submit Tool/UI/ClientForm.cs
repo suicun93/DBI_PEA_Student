@@ -15,7 +15,7 @@ namespace DBI_PE_Submit_Tool
         // Information about student: studentID, paperNo, examCode, urlDB to get material, listAnswer;
         private string UrlDB;
         private List<RichTextBox> ListAnswer = new List<RichTextBox>();
-        private Submition submition;
+        private Submission Submission;
         // Merge draft and submit to 1 method with a variable named "forDraft"
         private bool forDraft = true, forSubmit = false;
         // Make student preview their answers before submitting
@@ -45,8 +45,8 @@ namespace DBI_PE_Submit_Tool
                 studentLabel.Text = StudentName;
                 paperNoLabel.Text = PaperNo;
                 examCodeLabel.Text = examCode;
-                submition = new Submition(examCode, StudentName, PaperNo, json.Token);
-                submition.Register();
+                Submission = new Submission(examCode, StudentName, PaperNo, json.Token);
+                Submission.Register();
 
                 SetupTab();
                 SetupUI(restored);
@@ -114,9 +114,9 @@ namespace DBI_PE_Submit_Tool
             if (restored)
             {
                 // If student continue from break point, restore answers for them
-                submition.Restore();
+                Submission.Restore();
                 for (int i = 0; i < json.QuestionNumber; i++)
-                    ListAnswer[i].Text = submition.ListAnswer[i];
+                    ListAnswer[i].Text = Submission.ListAnswer[i];
             }
 
             // Add event to draft every time answers changed
@@ -132,15 +132,15 @@ namespace DBI_PE_Submit_Tool
         private void PreviewButton_Click(object sender, EventArgs e)
         {
             // List answers to preview
-            submition.Restore();
-            if (submition == null)
+            Submission.Restore();
+            if (Submission == null)
                 MessageBox.Show("Restore failed");
             else
             {
                 // SUm up answer to a string
                 int i = 0;
                 string answers = "";
-                foreach (string answer in submition.ListAnswer)
+                foreach (string answer in Submission.ListAnswer)
                 {
                     i++;
                     answers += "Question " + i + "\n\n" + (string.IsNullOrEmpty(answer) ? "(empty)" : answer)
@@ -189,12 +189,12 @@ namespace DBI_PE_Submit_Tool
             }));
 
             // Process
-            submition.ClearAnswer();
+            Submission.ClearAnswer();
             foreach (RichTextBox richTextBox in ListAnswer)
-                submition.AddAnswer(richTextBox.Text);
+                Submission.AddAnswer(richTextBox.Text);
             try
             {
-                submition.SaveToLocal();
+                Submission.SaveToLocal();
                 if (forDraft)
                 {
                     // TODO: Call API to draft all answer, exam code, student's rollID, paper number
@@ -228,7 +228,7 @@ namespace DBI_PE_Submit_Tool
         private void HandleSubmit()
         {
             // Call API to submit
-            bool result = submition.Submit((text) =>
+            bool result = Submission.Submit((text) =>
             {
                 Console.WriteLine(text);
             });

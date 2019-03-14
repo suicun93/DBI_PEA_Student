@@ -9,24 +9,24 @@ using System.Windows.Forms;
 namespace DBI_PE_Submit_Tool.Model
 {
     [Serializable]
-    public class Submition
+    public class Submission
     {
         public string StudentID { get; set; }
         public string ExamCode { get; set; }
         public string PaperNo { get; set; }
         public List<string> ListAnswer { get; set; }
         [JsonIgnore]
-        public SecureJsonSerializer<Submition> secureJsonSerializer;
+        public SecureJsonSerializer<Submission> secureJsonSerializer;
 
         private readonly string apiUrl = Constant.API_URL;
         private readonly string Token;
 
-        public Submition()
+        public Submission()
         {
 
         }
 
-        public Submition(string examCode, string studentID, string paperNo, string token)
+        public Submission(string examCode, string studentID, string paperNo, string token)
         {
             ExamCode = examCode;
             StudentID = studentID;
@@ -40,7 +40,7 @@ namespace DBI_PE_Submit_Tool.Model
             var dir = ExamCode;
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
-            secureJsonSerializer = new SecureJsonSerializer<Submition>(Path.Combine(dir, StudentID + ".dat"));
+            secureJsonSerializer = new SecureJsonSerializer<Submission>(Path.Combine(dir, StudentID + ".dat"));
         }
 
         public void AddAnswer(string answer) => ListAnswer.Add(answer);
@@ -105,13 +105,13 @@ namespace DBI_PE_Submit_Tool.Model
                 var dir = ExamCode;
                 if (Directory.Exists(dir))
                 {
-                    Submition submition;
+                    Submission Submission;
                     try
                     {
-                        submition = secureJsonSerializer.Load();
+                        Submission = secureJsonSerializer.Load();
                         // Load successfully
                         ListAnswer = new List<string>();
-                        foreach (var answer in submition.ListAnswer)
+                        foreach (var answer in Submission.ListAnswer)
                         {
                             ListAnswer.Add(answer);
                         }
