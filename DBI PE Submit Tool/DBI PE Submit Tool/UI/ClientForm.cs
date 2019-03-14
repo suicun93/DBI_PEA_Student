@@ -243,11 +243,25 @@ namespace DBI_PE_Submit_Tool
                    draftStatusLabel.Text = "Submit Status: Success";
                    draftStatusLabel.ForeColor = Color.Green;
                });
-                // Disable all controls.
-                foreach (Control c in Controls)
-                    if (c is Button || c is RichTextBox)
-                        c.Enabled = false;
-            }
+				// Disable all controls.
+				foreach (Control item in Controls)
+					if (item is Button)
+						item.Invoke((MethodInvoker)(()=> {
+							item.Enabled = false;
+						}));
+
+				foreach (TabPage item in tabBar.TabPages)
+				{
+					foreach (Control bth in item.Controls)
+					{
+						bth.Invoke((MethodInvoker)(() => {
+							bth.Enabled = false;
+						}));
+					}
+					
+				}
+
+			}
         }
 
         private void FontSize_ValueChanged(object sender, EventArgs e)
