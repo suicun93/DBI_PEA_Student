@@ -22,8 +22,10 @@ namespace DBI_PE_Submit_Tool.Common
                 {
                     client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
 
-                    var parameters = new System.Collections.Specialized.NameValueCollection();
-                    parameters.Add("token", token);
+                    var parameters = new System.Collections.Specialized.NameValueCollection
+                    {
+                        { "token", token }
+                    };
 
                     using (var stream = client.OpenRead(uri))
                     {
@@ -31,9 +33,12 @@ namespace DBI_PE_Submit_Tool.Common
                         string filename = new ContentDisposition(header_contentDisposition).FileName;
 
                         // Open windown to choose the path
-                        SaveFileDialog locationChooser = new SaveFileDialog();
-                        locationChooser.FileName = filename;
-                        locationChooser.InitialDirectory = Convert.ToString(Environment.SpecialFolder.DesktopDirectory); ;
+                        SaveFileDialog locationChooser = new SaveFileDialog
+                        {
+                            FileName = filename,
+                            InitialDirectory = Convert.ToString(Environment.SpecialFolder.DesktopDirectory)
+                        };
+                        ;
                         locationChooser.FilterIndex = 1;
                         locationChooser.Filter = "Zip files (*.rar,*.zip)|*.rar;*.zip;*.jpg|All files (*.*)|*.*";
 
@@ -81,11 +86,13 @@ namespace DBI_PE_Submit_Tool.Common
                         string filename = new ContentDisposition(header_contentDisposition).FileName;
                         using (var stream = response.GetResponseStream())
                         {
-
                             // Open windown to choose the path
-                            SaveFileDialog locationChooser = new SaveFileDialog();
-                            locationChooser.FileName = filename;
-                            locationChooser.InitialDirectory = Convert.ToString(Environment.SpecialFolder.DesktopDirectory); ;
+                            SaveFileDialog locationChooser = new SaveFileDialog
+                            {
+                                FileName = filename,
+                                InitialDirectory = Convert.ToString(Environment.SpecialFolder.DesktopDirectory)
+                            };
+                            ;
                             locationChooser.FilterIndex = 1;
                             locationChooser.Filter = "All files (*.*)|*.*|Zip files (*.rar,*.zip)|*.rar;*.zip;";
 
@@ -106,6 +113,4 @@ namespace DBI_PE_Submit_Tool.Common
             }
         }
     }
-
-
 }

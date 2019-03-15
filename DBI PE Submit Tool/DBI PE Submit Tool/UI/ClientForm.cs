@@ -266,6 +266,7 @@ namespace DBI_PE_Submit_Tool
 
         private void ExamContentButton_Click(object sender, EventArgs e)
         {
+            // Anh de tam 3 cai link o day, pull ve ma ko chay duoc thi copy thu muc Image vao bin nhe.
             string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg" };
             var showImageForm = new ShowImageForm(img);
         }
