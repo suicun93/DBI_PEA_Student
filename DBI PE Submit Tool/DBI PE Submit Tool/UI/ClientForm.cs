@@ -21,6 +21,15 @@ namespace DBI_PE_Submit_Tool
         // Make student preview their answers before submitting
         private bool previewed = false;
         public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
+        public bool Previewed
+        {
+            get => previewed;
+            set
+            {
+                previewed = value;
+                previewButton.Enabled = !previewed;
+            }
+        }
 
         System.Windows.Forms.Timer timer = null;
         private ResponseData json;
@@ -141,7 +150,7 @@ namespace DBI_PE_Submit_Tool
                     + "\n\n================================================\n\n";
             }
             // Show preview form.
-            new PreviewForm(completion: () => { previewed = true; }, answers: answers).Show();
+            new PreviewForm(completion: () => { Previewed = true; }, answers: answers).Show();
         }
 
 
@@ -150,7 +159,7 @@ namespace DBI_PE_Submit_Tool
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            if (!previewed)
+            if (!Previewed)
                 MessageBox.Show("You should preview before submitting.");
             else
                 if (readyToFinishCheckBox.Checked)
@@ -193,7 +202,7 @@ namespace DBI_PE_Submit_Tool
                     // TODO: Call API to draft all answer, exam code, student's rollID, paper number
                     // CallAPIToDraft()
                     // Change UI Draft Status UI to draft success
-                    previewed = false;
+                    Previewed = false;
                     draftStatusLabel.Invoke((MethodInvoker)(() =>
                     {
                         draftStatusLabel.Text = "Draft Status: Success";
