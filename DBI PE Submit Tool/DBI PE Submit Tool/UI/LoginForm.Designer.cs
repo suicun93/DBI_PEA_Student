@@ -61,6 +61,8 @@
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(118, 23);
             this.exitButton.TabIndex = 13;
+            this.exitButton.TabStop = false;
+            this.exitButton.Tag = "1";
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
             this.exitButton.Click += new System.EventHandler(this.BtnExit_Click);
@@ -170,7 +172,8 @@
             this.loginButton.Location = new System.Drawing.Point(73, 187);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(118, 23);
-            this.loginButton.TabIndex = 21;
+            this.loginButton.TabIndex = 0;
+            this.loginButton.Tag = "0";
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.BtnLogin_Click);
@@ -208,6 +211,7 @@
             this.Name = "LoginForm";
             this.Text = "PEA Login";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_Closing);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LoginForm_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

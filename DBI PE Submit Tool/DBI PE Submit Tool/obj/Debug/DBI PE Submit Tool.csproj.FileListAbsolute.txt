@@ -71,7 +71,6 @@ C:\dev\Capstone\DBI_PEA_Studen\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\D
 C:\dev\Capstone\DBI_PEA_Studen\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI PE Submit Tool.pdb
 C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.UI.PreviewForm.resources
 E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\obj\Debug\DBI_PE_Submit_Tool.UI.PreviewForm.resources
-E:\Capstone\DBI_PEA_Student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\Microsoft.SqlServer.TransactSql.ScriptDom.dll
 E:\capstone\student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.exe.config
 E:\capstone\student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.exe
 E:\capstone\student\DBI PE Submit Tool\DBI PE Submit Tool\bin\Debug\DBI PE Submit Tool.pdb

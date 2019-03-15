@@ -271,6 +271,36 @@ namespace DBI_PE_Submit_Tool
                 box.Font = new Font(box.Font.FontFamily, (int)fontSize.Value);
         }
 
+        private void ClientForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timeLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void paperNoLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /// <summary>
         ///     Handle when user close window -> application will be closed. 
         /// </summary>

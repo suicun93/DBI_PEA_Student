@@ -20,7 +20,25 @@ namespace DBI_PE_Submit_Tool
 
         private ResponseData json;
 
-        public LoginForm() => InitializeComponent();
+        public LoginForm()
+        {
+            InitializeComponent();
+            foreach (Control control in Controls)
+            {
+                if (control is TextBox)
+                {
+                    control.KeyPress += Control_KeyPress;
+                }
+            }
+        }
+
+        private void Control_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                BtnLogin_Click(null, null);
+            }
+        }
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
@@ -97,5 +115,13 @@ namespace DBI_PE_Submit_Tool
 
         // When student quit.
         private void LoginForm_Closing(object sender, FormClosingEventArgs e) => Application.Exit();
+
+        private void LoginForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                BtnLogin_Click(null, null);
+            }
+        }
     }
 }

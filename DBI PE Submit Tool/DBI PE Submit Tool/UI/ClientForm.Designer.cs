@@ -113,6 +113,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(420, 90);
             this.label4.Name = "label4";
@@ -120,9 +121,11 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Paper No:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // helpButton
             // 
+            this.helpButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.helpButton.Location = new System.Drawing.Point(17, 427);
             this.helpButton.Name = "helpButton";
             this.helpButton.Size = new System.Drawing.Size(75, 23);
@@ -157,6 +160,7 @@
             // 
             // paperNoLabel
             // 
+            this.paperNoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.paperNoLabel.AutoSize = true;
             this.paperNoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.paperNoLabel.ForeColor = System.Drawing.SystemColors.Highlight;
@@ -166,6 +170,7 @@
             this.paperNoLabel.TabIndex = 8;
             this.paperNoLabel.Text = "Paper No";
             this.paperNoLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.paperNoLabel.Click += new System.EventHandler(this.paperNoLabel_Click);
             // 
             // downloadMaterialButton
             // 
@@ -179,6 +184,9 @@
             // 
             // tabBar
             // 
+            this.tabBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabBar.Controls.Add(this.q1Tab);
             this.tabBar.Controls.Add(this.q2Tab);
             this.tabBar.Controls.Add(this.q3Tab);
@@ -221,7 +229,7 @@
             this.q2Tab.Location = new System.Drawing.Point(4, 22);
             this.q2Tab.Name = "q2Tab";
             this.q2Tab.Padding = new System.Windows.Forms.Padding(3);
-            this.q2Tab.Size = new System.Drawing.Size(742, 191);
+            this.q2Tab.Size = new System.Drawing.Size(742, 233);
             this.q2Tab.TabIndex = 1;
             this.q2Tab.Text = "Q2";
             this.q2Tab.UseVisualStyleBackColor = true;
@@ -239,7 +247,7 @@
             this.q3Tab.Controls.Add(this.q3RichTextBox);
             this.q3Tab.Location = new System.Drawing.Point(4, 22);
             this.q3Tab.Name = "q3Tab";
-            this.q3Tab.Size = new System.Drawing.Size(742, 191);
+            this.q3Tab.Size = new System.Drawing.Size(742, 233);
             this.q3Tab.TabIndex = 2;
             this.q3Tab.Text = "Q3";
             this.q3Tab.UseVisualStyleBackColor = true;
@@ -257,7 +265,7 @@
             this.q4Tab.Controls.Add(this.q4RichTextBox);
             this.q4Tab.Location = new System.Drawing.Point(4, 22);
             this.q4Tab.Name = "q4Tab";
-            this.q4Tab.Size = new System.Drawing.Size(742, 191);
+            this.q4Tab.Size = new System.Drawing.Size(742, 233);
             this.q4Tab.TabIndex = 3;
             this.q4Tab.Text = "Q4";
             this.q4Tab.UseVisualStyleBackColor = true;
@@ -275,7 +283,7 @@
             this.q5Tab.Controls.Add(this.q5RichTextBox);
             this.q5Tab.Location = new System.Drawing.Point(4, 22);
             this.q5Tab.Name = "q5Tab";
-            this.q5Tab.Size = new System.Drawing.Size(742, 191);
+            this.q5Tab.Size = new System.Drawing.Size(742, 233);
             this.q5Tab.TabIndex = 4;
             this.q5Tab.Text = "Q5";
             this.q5Tab.UseVisualStyleBackColor = true;
@@ -293,7 +301,7 @@
             this.q6Tab.Controls.Add(this.q6RichTextBox);
             this.q6Tab.Location = new System.Drawing.Point(4, 22);
             this.q6Tab.Name = "q6Tab";
-            this.q6Tab.Size = new System.Drawing.Size(742, 191);
+            this.q6Tab.Size = new System.Drawing.Size(742, 233);
             this.q6Tab.TabIndex = 5;
             this.q6Tab.Text = "Q6";
             this.q6Tab.UseVisualStyleBackColor = true;
@@ -311,7 +319,7 @@
             this.q7Tab.Controls.Add(this.q7RichTextBox);
             this.q7Tab.Location = new System.Drawing.Point(4, 22);
             this.q7Tab.Name = "q7Tab";
-            this.q7Tab.Size = new System.Drawing.Size(742, 191);
+            this.q7Tab.Size = new System.Drawing.Size(742, 233);
             this.q7Tab.TabIndex = 6;
             this.q7Tab.Text = "Q7";
             this.q7Tab.UseVisualStyleBackColor = true;
@@ -329,7 +337,7 @@
             this.q8Tab.Controls.Add(this.q8RichTextBox);
             this.q8Tab.Location = new System.Drawing.Point(4, 22);
             this.q8Tab.Name = "q8Tab";
-            this.q8Tab.Size = new System.Drawing.Size(742, 191);
+            this.q8Tab.Size = new System.Drawing.Size(742, 233);
             this.q8Tab.TabIndex = 7;
             this.q8Tab.Text = "Q8";
             this.q8Tab.UseVisualStyleBackColor = true;
@@ -347,7 +355,7 @@
             this.q9Tab.Controls.Add(this.q9RichTextBox);
             this.q9Tab.Location = new System.Drawing.Point(4, 22);
             this.q9Tab.Name = "q9Tab";
-            this.q9Tab.Size = new System.Drawing.Size(742, 191);
+            this.q9Tab.Size = new System.Drawing.Size(742, 233);
             this.q9Tab.TabIndex = 8;
             this.q9Tab.Text = "Q9";
             this.q9Tab.UseVisualStyleBackColor = true;
@@ -365,7 +373,7 @@
             this.q10Tab.Controls.Add(this.q10RichTextBox);
             this.q10Tab.Location = new System.Drawing.Point(4, 22);
             this.q10Tab.Name = "q10Tab";
-            this.q10Tab.Size = new System.Drawing.Size(742, 191);
+            this.q10Tab.Size = new System.Drawing.Size(742, 233);
             this.q10Tab.TabIndex = 9;
             this.q10Tab.Text = "Q10";
             this.q10Tab.UseVisualStyleBackColor = true;
@@ -380,6 +388,7 @@
             // 
             // readyToFinishCheckBox
             // 
+            this.readyToFinishCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.readyToFinishCheckBox.AutoSize = true;
             this.readyToFinishCheckBox.Location = new System.Drawing.Point(458, 430);
             this.readyToFinishCheckBox.Name = "readyToFinishCheckBox";
@@ -390,6 +399,7 @@
             // 
             // submitButton
             // 
+            this.submitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.submitButton.Location = new System.Drawing.Point(657, 427);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(106, 23);
@@ -400,6 +410,7 @@
             // 
             // draftStatusLabel
             // 
+            this.draftStatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.draftStatusLabel.AutoSize = true;
             this.draftStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.draftStatusLabel.ForeColor = System.Drawing.Color.DarkRed;
@@ -411,6 +422,7 @@
             // 
             // previewButton
             // 
+            this.previewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.previewButton.Location = new System.Drawing.Point(111, 427);
             this.previewButton.Name = "previewButton";
             this.previewButton.Size = new System.Drawing.Size(75, 23);
@@ -421,6 +433,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(389, 57);
             this.label6.Name = "label6";
@@ -428,9 +441,11 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "Time Remaining:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // timeLabel
             // 
+            this.timeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.timeLabel.AutoSize = true;
             this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.timeLabel.ForeColor = System.Drawing.SystemColors.Highlight;
@@ -440,18 +455,22 @@
             this.timeLabel.TabIndex = 19;
             this.timeLabel.Text = "00:00:00";
             this.timeLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.timeLabel.Click += new System.EventHandler(this.timeLabel_Click);
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(421, 127);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(54, 13);
             this.label7.TabIndex = 20;
             this.label7.Text = "Font Size:";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // fontSize
             // 
+            this.fontSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.fontSize.Location = new System.Drawing.Point(502, 124);
             this.fontSize.Maximum = new decimal(new int[] {
             20,
@@ -496,9 +515,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MinimumSize = new System.Drawing.Size(798, 500);
             this.Name = "ClientForm";
             this.Text = "PEA Client Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientForm_FormClosing);
+            this.Load += new System.EventHandler(this.ClientForm_Load);
             this.tabBar.ResumeLayout(false);
             this.q1Tab.ResumeLayout(false);
             this.q2Tab.ResumeLayout(false);

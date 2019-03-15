@@ -63,6 +63,8 @@
             this.ClientSize = new System.Drawing.Size(428, 436);
             this.Controls.Add(this.finishPreviewButton);
             this.Controls.Add(this.previewTextBox);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "PreviewForm";
             this.Text = "Preview";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PreviewForm_FormClosing);
