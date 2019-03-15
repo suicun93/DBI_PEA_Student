@@ -211,7 +211,6 @@
             this.Name = "LoginForm";
             this.Text = "PEA Login";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_Closing);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LoginForm_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

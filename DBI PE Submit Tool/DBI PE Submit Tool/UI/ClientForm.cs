@@ -131,24 +131,17 @@ namespace DBI_PE_Submit_Tool
         /// </summary>
         private void PreviewButton_Click(object sender, EventArgs e)
         {
-            // List answers to preview
-            Submission.Restore();
-            if (Submission == null)
-                MessageBox.Show("Restore failed");
-            else
+            // Sum up answer to a string
+            int i = 0;
+            string answers = "";
+            foreach (string answer in Submission.ListAnswer)
             {
-                // SUm up answer to a string
-                int i = 0;
-                string answers = "";
-                foreach (string answer in Submission.ListAnswer)
-                {
-                    i++;
-                    answers += "Question " + i + "\n\n" + (string.IsNullOrEmpty(answer) ? "(empty)" : answer)
-                        + "\n\n================================================\n\n";
-                }
-                // Show preview form.
-                new PreviewForm(completion: () => { previewed = true; }, answers: answers).Show();
+                i++;
+                answers += "Question " + i + "\n\n" + (string.IsNullOrEmpty(answer) ? "(empty)" : answer)
+                    + "\n\n================================================\n\n";
             }
+            // Show preview form.
+            new PreviewForm(completion: () => { previewed = true; }, answers: answers).Show();
         }
 
 
@@ -269,36 +262,6 @@ namespace DBI_PE_Submit_Tool
         {
             foreach (RichTextBox box in ListAnswer)
                 box.Font = new Font(box.Font.FontFamily, (int)fontSize.Value);
-        }
-
-        private void ClientForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timeLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void paperNoLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
         }
 
         /// <summary>

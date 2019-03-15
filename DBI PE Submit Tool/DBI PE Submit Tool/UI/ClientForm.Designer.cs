@@ -121,7 +121,6 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Paper No:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // helpButton
             // 
@@ -170,7 +169,6 @@
             this.paperNoLabel.TabIndex = 8;
             this.paperNoLabel.Text = "Paper No";
             this.paperNoLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.paperNoLabel.Click += new System.EventHandler(this.paperNoLabel_Click);
             // 
             // downloadMaterialButton
             // 
@@ -441,7 +439,6 @@
             this.label6.TabIndex = 18;
             this.label6.Text = "Time Remaining:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // timeLabel
             // 
@@ -455,7 +452,6 @@
             this.timeLabel.TabIndex = 19;
             this.timeLabel.Text = "00:00:00";
             this.timeLabel.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.timeLabel.Click += new System.EventHandler(this.timeLabel_Click);
             // 
             // label7
             // 
@@ -466,7 +462,6 @@
             this.label7.Size = new System.Drawing.Size(54, 13);
             this.label7.TabIndex = 20;
             this.label7.Text = "Font Size:";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // fontSize
             // 
@@ -519,7 +514,6 @@
             this.Name = "ClientForm";
             this.Text = "PEA Client Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientForm_FormClosing);
-            this.Load += new System.EventHandler(this.ClientForm_Load);
             this.tabBar.ResumeLayout(false);
             this.q1Tab.ResumeLayout(false);
             this.q2Tab.ResumeLayout(false);
