@@ -79,6 +79,12 @@
     <Compile Include="UI\PreviewForm.Designer.cs">
       <DependentUpon>PreviewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\ShowImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ShowImageForm.Designer.cs">
+      <DependentUpon>ShowImageForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="UI\ClientForm.resx">
       <DependentUpon>ClientForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,6 +104,9 @@
     <EmbeddedResource Include="UI\PreviewForm.resx">
       <DependentUpon>PreviewForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\ShowImageForm.resx">
+      <DependentUpon>ShowImageForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -112,6 +121,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Image\a.jpg" />
+    <Content Include="Image\b.jpg" />
+    <Content Include="Image\c.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

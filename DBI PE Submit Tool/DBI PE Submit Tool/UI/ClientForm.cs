@@ -264,6 +264,12 @@ namespace DBI_PE_Submit_Tool
                 box.Font = new Font(box.Font.FontFamily, (int)fontSize.Value);
         }
 
+        private void ExamContentButton_Click(object sender, EventArgs e)
+        {
+            string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg" };
+            var showImageForm = new ShowImageForm(img);
+        }
+
         /// <summary>
         ///     Handle when user close window -> application will be closed. 
         /// </summary>

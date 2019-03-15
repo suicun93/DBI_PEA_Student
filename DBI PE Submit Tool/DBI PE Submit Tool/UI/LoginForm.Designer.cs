@@ -165,7 +165,7 @@
             this.domainTextBox.Name = "domainTextBox";
             this.domainTextBox.Size = new System.Drawing.Size(271, 20);
             this.domainTextBox.TabIndex = 20;
-            this.domainTextBox.Text = "34.215.75.169";
+            this.domainTextBox.Text = "fu.edu.vn";
             // 
             // loginButton
             // 

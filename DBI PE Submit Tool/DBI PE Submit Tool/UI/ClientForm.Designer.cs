@@ -66,6 +66,7 @@
             this.timeLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.fontSize = new System.Windows.Forms.NumericUpDown();
+            this.examContentButton = new System.Windows.Forms.Button();
             this.tabBar.SuspendLayout();
             this.q1Tab.SuspendLayout();
             this.q2Tab.SuspendLayout();
@@ -174,7 +175,7 @@
             // 
             this.downloadMaterialButton.Location = new System.Drawing.Point(18, 122);
             this.downloadMaterialButton.Name = "downloadMaterialButton";
-            this.downloadMaterialButton.Size = new System.Drawing.Size(168, 23);
+            this.downloadMaterialButton.Size = new System.Drawing.Size(146, 23);
             this.downloadMaterialButton.TabIndex = 9;
             this.downloadMaterialButton.Text = "Download Given Material ";
             this.downloadMaterialButton.UseVisualStyleBackColor = true;
@@ -466,7 +467,7 @@
             // fontSize
             // 
             this.fontSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fontSize.Location = new System.Drawing.Point(502, 124);
+            this.fontSize.Location = new System.Drawing.Point(502, 123);
             this.fontSize.Maximum = new decimal(new int[] {
             20,
             0,
@@ -487,11 +488,22 @@
             0});
             this.fontSize.ValueChanged += new System.EventHandler(this.FontSize_ValueChanged);
             // 
+            // examContentButton
+            // 
+            this.examContentButton.Location = new System.Drawing.Point(195, 122);
+            this.examContentButton.Name = "examContentButton";
+            this.examContentButton.Size = new System.Drawing.Size(146, 23);
+            this.examContentButton.TabIndex = 23;
+            this.examContentButton.Text = "Exam Content";
+            this.examContentButton.UseVisualStyleBackColor = true;
+            this.examContentButton.Click += new System.EventHandler(this.ExamContentButton_Click);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 461);
+            this.Controls.Add(this.examContentButton);
             this.Controls.Add(this.fontSize);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.timeLabel);
@@ -571,5 +583,6 @@
         private System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown fontSize;
+        private System.Windows.Forms.Button examContentButton;
     }
 }

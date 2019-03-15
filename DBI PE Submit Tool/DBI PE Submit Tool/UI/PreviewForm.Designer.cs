@@ -52,7 +52,7 @@
             this.finishPreviewButton.Name = "finishPreviewButton";
             this.finishPreviewButton.Size = new System.Drawing.Size(105, 23);
             this.finishPreviewButton.TabIndex = 1;
-            this.finishPreviewButton.Text = "Finish Preview";
+            this.finishPreviewButton.Text = "Close";
             this.finishPreviewButton.UseVisualStyleBackColor = true;
             this.finishPreviewButton.Click += new System.EventHandler(this.FinishPreviewButton_Click);
             // 
