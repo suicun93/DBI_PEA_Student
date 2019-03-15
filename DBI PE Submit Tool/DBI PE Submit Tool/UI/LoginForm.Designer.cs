@@ -133,7 +133,7 @@
             this.examCodeTextBox.Name = "examCodeTextBox";
             this.examCodeTextBox.Size = new System.Drawing.Size(271, 20);
             this.examCodeTextBox.TabIndex = 16;
-            this.examCodeTextBox.Text = "PE_DBI_1_SP2019_567899";
+            this.examCodeTextBox.Text = "YourClass";
             // 
             // paperNoTextBox
             // 
