@@ -9,40 +9,57 @@ namespace DBI_PE_Submit_Tool.UI
     public partial class ShowImageForm : Form
     {
         //string root = @"C:\Users\hoangduc\Desktop\Project\Student\DBI PE Submit Tool\DBI PE Submit Tool\";
-        List<Image> images = new List<Image>();
-        public ShowImageForm(string[] images)
+        private Action Clear = null;
+        List<Image> images;
+        public ShowImageForm(List<Image> images, Action clear)
         {
             InitializeComponent();
-            foreach (var image in images)
-                this.images.Add(Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, image)));
-            Show();
-            ShowImage();
+            this.images = images;
+            Clear = clear;
         }
         private static Image ResizeImage(Image imgToResize, Size size) => new Bitmap(imgToResize, size);
 
         private void ShowImage()
         {
-            flowLayoutPanel.Invoke((MethodInvoker)(() =>
+            if (flowLayoutPanel != null)
             {
-                flowLayoutPanel.SizeChanged -= LayoutResize;
-                flowLayoutPanel.Controls.Clear();
-                var sizeBar = SystemInformation.VerticalScrollBarWidth + 22;
-                foreach (Image image in images)
+                flowLayoutPanel?.Invoke((MethodInvoker)(() =>
                 {
-                    int ratio = image.Height / image.Width;
-                    PictureBox p = new PictureBox
+                    if (flowLayoutPanel != null)
                     {
-                        Width = flowLayoutPanel.Width,
-                        Height = Width * ratio,
-                        Image = ResizeImage(image, new Size(Width - sizeBar, Height - sizeBar)),
-                        SizeMode = PictureBoxSizeMode.AutoSize,
-                    };
-                    flowLayoutPanel.Controls.Add(p);
-                }
-                flowLayoutPanel.SizeChanged += LayoutResize;
-            }));
+                        flowLayoutPanel.SizeChanged -= LayoutResize;
+                        flowLayoutPanel.Controls.Clear();
+                        var sizeBar = SystemInformation.VerticalScrollBarWidth + 22;
+                        foreach (Image image in images)
+                        {
+                            int ratio = image.Height / image.Width;
+                            PictureBox p = new PictureBox
+                            {
+                                Width = flowLayoutPanel.Width,
+                                Height = Width * ratio,
+                                Image = ResizeImage(image, new Size(Width - sizeBar, Height - sizeBar)),
+                                SizeMode = PictureBoxSizeMode.AutoSize,
+                            };
+                            flowLayoutPanel.Controls.Add(p);
+                        }
+                        flowLayoutPanel.SizeChanged += LayoutResize;
+                    }
+                }));
+            }
         }
 
         private void LayoutResize(object sender, EventArgs e) => ShowImage();
+
+        private void ShowImageForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Hide();
+            e.Cancel = true; // this cancels the close event.
+            Clear();
+        }
+
+        private void ShowImageForm_Load(object sender, EventArgs e)
+        {
+            ShowImage();
+        }
     }
 }

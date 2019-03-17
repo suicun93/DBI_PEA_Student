@@ -50,8 +50,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 558);
             this.Controls.Add(this.flowLayoutPanel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ShowImageForm";
             this.Text = "ShowImage";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ShowImageForm_FormClosing);
+            this.Load += new System.EventHandler(this.ShowImageForm_Load);
             this.ResumeLayout(false);
 
         }

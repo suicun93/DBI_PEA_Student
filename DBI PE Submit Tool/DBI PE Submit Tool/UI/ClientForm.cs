@@ -7,6 +7,7 @@ using DBI_PE_Submit_Tool.Entity;
 using DBI_PE_Submit_Tool.Model;
 using DBI_PE_Submit_Tool.Common;
 using DBI_PE_Submit_Tool.UI;
+using System.IO;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -15,6 +16,8 @@ namespace DBI_PE_Submit_Tool
         // Information about student: studentID, paperNo, examCode, urlDB to get material, listAnswer;
         private string UrlDB;
         private List<RichTextBox> ListAnswer = new List<RichTextBox>();
+        private List<Image> images = new List<Image>();
+        private ShowImageForm showImageForm = null;
         private Submission Submission;
         // Merge draft and submit to 1 method with a variable named "forDraft"
         private bool forDraft = true, forSubmit = false;
@@ -59,6 +62,7 @@ namespace DBI_PE_Submit_Tool
 
                 SetupTab();
                 SetupUI(restored);
+
             }
         }
 
@@ -80,7 +84,10 @@ namespace DBI_PE_Submit_Tool
                 remainingTime--;
                 timeLabel.Invoke((MethodInvoker)(() =>
                 {
-                    timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
+                    if (timeLabel != null)
+                    {
+                        timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
+                    }
                 }));
             }
             else
@@ -113,6 +120,12 @@ namespace DBI_PE_Submit_Tool
         /// </summary>
         private void SetupUI(bool restored)
         {
+            // Anh de tam 3 cai link o day, pull ve ma ko chay duoc thi copy thu muc Image vao bin nhe.
+            string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg", @"Image\d.jpg", @"Image\e.jpg", @"Image\f.jpg", @"Image\g.jpg", @"Image\h.jpg" };
+            foreach (var image in img)
+                images.Add(Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, image)));
+            showImageForm = new ShowImageForm(images, () => { });
+
             for (int i = 0; i < json.QuestionNumber; i++)
             {
                 RichTextBox box = (RichTextBox)tabBar.TabPages[i].Controls["textBox"];
@@ -150,7 +163,8 @@ namespace DBI_PE_Submit_Tool
                     + "\n\n================================================\n\n";
             }
             // Show preview form.
-            new PreviewForm(completion: () => { Previewed = true; }, answers: answers).Show();
+            PreviewForm previewForm = new PreviewForm(completion: () => { Previewed = true; previewForm = null; }, answers: answers);
+            previewForm.Show();
         }
 
 
@@ -275,9 +289,7 @@ namespace DBI_PE_Submit_Tool
 
         private void ExamContentButton_Click(object sender, EventArgs e)
         {
-            // Anh de tam 3 cai link o day, pull ve ma ko chay duoc thi copy thu muc Image vao bin nhe.
-            string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg" };
-            var showImageForm = new ShowImageForm(img);
+            showImageForm.Show();
         }
 
         /// <summary>

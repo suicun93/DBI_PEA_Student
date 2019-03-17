@@ -120,12 +120,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Image\a.jpg" />
     <Content Include="Image\b.jpg" />
     <Content Include="Image\c.jpg" />
+    <Content Include="Image\d.jpg" />
+    <Content Include="Image\e.jpg" />
+    <Content Include="Image\f.jpg" />
+    <Content Include="Image\g.jpg" />
+    <Content Include="Image\h.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
