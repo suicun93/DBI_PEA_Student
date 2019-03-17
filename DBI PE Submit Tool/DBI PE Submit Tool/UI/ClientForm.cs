@@ -82,17 +82,13 @@ namespace DBI_PE_Submit_Tool
             if (remainingTime > 0)
             {
                 remainingTime--;
-                if (timeLabel!= null)
+                if (timeLabel != null)
                 {
-                    if (!IsHandleCreated)
-                        CreateControl();
-                    timeLabel.Invoke((MethodInvoker)(() =>
+                    if (timeLabel != null && timeLabel.Visible)
                     {
-                        if (timeLabel != null && timeLabel.Visible)
-                        {
-                            timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
-                        }
-                    }));
+                        timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
+                        timeLabel.Refresh();
+                    }
                 }
             }
             else
@@ -130,18 +126,18 @@ namespace DBI_PE_Submit_Tool
             {
                 try
                 {
+                    // unZip ko duoc
                     //ZipFile.ExtractToDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Image\image.zip"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Image\"));
-                    string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg", @"Image\d.jpg", @"Image\e.jpg", @"Image\f.jpg", @"Image\g.jpg", @"Image\h.jpg" };
-                    foreach (var image in img)
-                        images.Add(Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, image)));
-                    showImageForm = new ShowImageForm(images, () => { });
                 }
                 catch (Exception)
                 {
                 }
-               
+                string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg", @"Image\d.jpg", @"Image\e.jpg", @"Image\f.jpg", @"Image\g.jpg", @"Image\h.jpg" };
+                foreach (var image in img)
+                    images.Add(Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, image)));
+                showImageForm = new ShowImageForm(images, () => { });
             }
-           
+
             for (int i = 0; i < json.QuestionNumber; i++)
             {
                 RichTextBox box = (RichTextBox)tabBar.TabPages[i].Controls["textBox"];
@@ -215,11 +211,9 @@ namespace DBI_PE_Submit_Tool
         private void SumUpAnswer(bool forDraft)
         {
             // Change UI Draft Status UI 
-            draftStatusLabel.Invoke((MethodInvoker)(() =>
-            {
-                draftStatusLabel.Text = "Draft Status: N/A";
-                draftStatusLabel.ForeColor = Color.Red;
-            }));
+            draftStatusLabel.Text = "Draft Status: N/A";
+            draftStatusLabel.ForeColor = Color.Red;
+            draftStatusLabel.Refresh();
 
             // Process
             Submission.ClearAnswer();
@@ -234,11 +228,10 @@ namespace DBI_PE_Submit_Tool
                     // CallAPIToDraft()
                     // Change UI Draft Status UI to draft success
                     Previewed = false;
-                    draftStatusLabel.Invoke((MethodInvoker)(() =>
-                    {
-                        draftStatusLabel.Text = "Draft Status: Success";
-                        draftStatusLabel.ForeColor = Color.Green;
-                    }));
+
+                    draftStatusLabel.Text = "Draft Status: Success";
+                    draftStatusLabel.ForeColor = Color.Green;
+                    draftStatusLabel.Refresh();
                 }
                 else
                 {
@@ -250,11 +243,9 @@ namespace DBI_PE_Submit_Tool
             catch (Exception)
             {
                 // Change UI Draft Status UI failed
-                draftStatusLabel.Invoke((MethodInvoker)(() =>
-                {
-                    draftStatusLabel.Text = forDraft ? "Draft" : "Submit" + " Status: N/A";
-                    draftStatusLabel.ForeColor = Color.Red;
-                }));
+                draftStatusLabel.Text = forDraft ? "Draft" : "Submit" + " Status: N/A";
+                draftStatusLabel.ForeColor = Color.Red;
+                draftStatusLabel.Refresh();
             }
         }
 
@@ -265,37 +256,32 @@ namespace DBI_PE_Submit_Tool
             {
                 Console.WriteLine(text);
             });
+
+            // Stop time when submit successfully
+            timer?.Stop();
+
+            // Disable all controls.
+            foreach (Control item in Controls)
+                if (item is Button)
+                    item.Enabled = false;
+            foreach (TabPage item in tabBar.TabPages)
+                foreach (Control bth in item.Controls)
+                    bth.Enabled = false;
+            readyToFinishCheckBox.Enabled = false;
             if (result)
             {
-                // Stop time when submit successfully
-                timer?.Stop();
-
                 // Change UI Draft Status UI to submit success
-                draftStatusLabel.Invoke((MethodInvoker)(() =>
-                {
-                    draftStatusLabel.Text = "Submit Status: Success";
-                    draftStatusLabel.ForeColor = Color.Green;
-                }));
-
-                // Disable all controls.
-                foreach (Control item in Controls)
-                    if (item is Button)
-                        item.Invoke((MethodInvoker)(() =>
-                        {
-                            item.Enabled = false;
-                        }));
-                foreach (TabPage item in tabBar.TabPages)
-                {
-                    foreach (Control bth in item.Controls)
-                        bth.Invoke((MethodInvoker)(() =>
-                        {
-                            bth.Enabled = false;
-                        }));
-                }
-                readyToFinishCheckBox.Enabled = false;
+                draftStatusLabel.Text = "Submit Status: Success";
+                draftStatusLabel.ForeColor = Color.Green;
             }
             else
-                MessageBox.Show("Submit failed.");
+            {
+                // Change UI Draft Status UI to submit success
+                draftStatusLabel.Text = "Submit Status: Failed";
+                draftStatusLabel.ForeColor = Color.Red;
+            }
+            draftStatusLabel.Refresh();
+
         }
 
         private void FontSize_ValueChanged(object sender, EventArgs e)
