@@ -133,6 +133,7 @@
     <Content Include="Image\f.jpg" />
     <Content Include="Image\g.jpg" />
     <Content Include="Image\h.jpg" />
+    <Content Include="System.IO.Compression.FileSystem.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

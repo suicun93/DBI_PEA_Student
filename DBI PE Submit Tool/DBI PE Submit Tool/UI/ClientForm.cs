@@ -8,6 +8,7 @@ using DBI_PE_Submit_Tool.Model;
 using DBI_PE_Submit_Tool.Common;
 using DBI_PE_Submit_Tool.UI;
 using System.IO;
+using System.IO.Compression;
 
 namespace DBI_PE_Submit_Tool
 {
@@ -49,7 +50,6 @@ namespace DBI_PE_Submit_Tool
             else
             {
                 json = _json;
-                SetupTimer();
 
                 // Now I hard code a link to call api get material.
                 UrlDBToDownload = Constant.API_URL + "/material";
@@ -82,13 +82,17 @@ namespace DBI_PE_Submit_Tool
             if (remainingTime > 0)
             {
                 remainingTime--;
-                timeLabel.Invoke((MethodInvoker)(() =>
+                if (timeLabel!= null)
                 {
-                    if (timeLabel != null)
+                    
+                    timeLabel.Invoke((MethodInvoker)(() =>
                     {
-                        timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
-                    }
-                }));
+                        if (timeLabel != null && timeLabel.Visible)
+                        {
+                            timeLabel.Text = TimeSpan.FromSeconds(remainingTime).ToString(@"hh\:mm\:ss");
+                        }
+                    }));
+                }
             }
             else
             {
@@ -120,12 +124,23 @@ namespace DBI_PE_Submit_Tool
         /// </summary>
         private void SetupUI(bool restored)
         {
-            // Anh de tam 3 cai link o day, pull ve ma ko chay duoc thi copy thu muc Image vao bin nhe.
-            string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg", @"Image\d.jpg", @"Image\e.jpg", @"Image\f.jpg", @"Image\g.jpg", @"Image\h.jpg" };
-            foreach (var image in img)
-                images.Add(Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, image)));
-            showImageForm = new ShowImageForm(images, () => { });
-
+            // Giai nen @"Image\image.zip"
+            if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Image\image.zip")))
+            {
+                try
+                {
+                    //ZipFile.ExtractToDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Image\image.zip"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Image\"));
+                    string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg", @"Image\d.jpg", @"Image\e.jpg", @"Image\f.jpg", @"Image\g.jpg", @"Image\h.jpg" };
+                    foreach (var image in img)
+                        images.Add(Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, image)));
+                    showImageForm = new ShowImageForm(images, () => { });
+                }
+                catch (Exception)
+                {
+                }
+               
+            }
+           
             for (int i = 0; i < json.QuestionNumber; i++)
             {
                 RichTextBox box = (RichTextBox)tabBar.TabPages[i].Controls["textBox"];
@@ -144,6 +159,7 @@ namespace DBI_PE_Submit_Tool
             // Add event to draft every time answers changed
             foreach (RichTextBox textBox in ListAnswer)
                 textBox.TextChanged += new EventHandler(DraftAnswers);
+            SetupTimer();
         }
 
         private void HelpButton_Click(object sender, EventArgs e) => MessageBox.Show("You should preview before submitting.");
