@@ -84,7 +84,8 @@ namespace DBI_PE_Submit_Tool
                 remainingTime--;
                 if (timeLabel!= null)
                 {
-                    
+                    if (!IsHandleCreated)
+                        CreateControl();
                     timeLabel.Invoke((MethodInvoker)(() =>
                     {
                         if (timeLabel != null && timeLabel.Visible)
