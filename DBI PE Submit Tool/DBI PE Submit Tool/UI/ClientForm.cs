@@ -15,16 +15,18 @@ namespace DBI_PE_Submit_Tool
     public partial class ClientForm : Form
     {
         // Information about student: studentID, paperNo, examCode, urlDB to get material, listAnswer;
-        private string UrlDB;
         private List<RichTextBox> ListAnswer = new List<RichTextBox>();
         private List<Image> images = new List<Image>();
         private ShowImageForm showImageForm = null;
         private Submission Submission;
+        private string UrlDBToDownload;
+        private ExamInfo examInfo;
+
         // Merge draft and submit to 1 method with a variable named "forDraft"
         private bool forDraft = true, forSubmit = false;
+
         // Make student preview their answers before submitting
         private bool previewed = false;
-        public string UrlDBToDownload { get => UrlDB; set => UrlDB = value; }
         public bool Previewed
         {
             get => previewed;
@@ -35,14 +37,15 @@ namespace DBI_PE_Submit_Tool
             }
         }
 
+        // Data from server
         System.Windows.Forms.Timer timer = null;
         private ResponseData json;
         private int remainingTime;
 
-        public ClientForm(string examCode, string PaperNo, string StudentName, ResponseData _json, bool restored)
+        public ClientForm(string examCode, string paperNo, string StudentName, ResponseData _json, bool restored)
         {
             InitializeComponent();
-            if (string.IsNullOrEmpty(examCode) || string.IsNullOrEmpty(PaperNo) || string.IsNullOrEmpty(StudentName))
+            if (string.IsNullOrEmpty(examCode) || string.IsNullOrEmpty(paperNo) || string.IsNullOrEmpty(StudentName))
             {
                 MessageBox.Show("Empty Information");
                 Application.Exit();
@@ -50,14 +53,22 @@ namespace DBI_PE_Submit_Tool
             else
             {
                 json = _json;
+                examInfo = new ExamInfo(examCode, paperNo);
+
+                Thread t = new Thread(() =>
+                {
+                    string url = Constant.API_URL + "/questions";
+                    //this.images = Download.DownloadQuestions(url, json.Token, examInfo.ExamCode, examInfo.PaperNo);
+                });
+                t.Start();
 
                 // Now I hard code a link to call api get material.
                 UrlDBToDownload = Constant.API_URL + "/material";
 
                 studentLabel.Text = StudentName;
-                paperNoLabel.Text = PaperNo;
+                paperNoLabel.Text = paperNo;
                 examCodeLabel.Text = examCode;
-                Submission = new Submission(examCode, StudentName, PaperNo, json.Token);
+                Submission = new Submission(examCode, StudentName, paperNo, json.Token);
                 Submission.Register();
 
                 SetupTab();
@@ -93,6 +104,8 @@ namespace DBI_PE_Submit_Tool
             }
             else
             {
+                timer.Stop();
+                DisableControls();
                 // Make student to submit without preview
                 SumUpAnswer(forSubmit);
             }
@@ -121,22 +134,6 @@ namespace DBI_PE_Submit_Tool
         /// </summary>
         private void SetupUI(bool restored)
         {
-            // Giai nen @"Image\image.zip"
-            if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Image\image.zip")))
-            {
-                try
-                {
-                    // unZip ko duoc
-                    //ZipFile.ExtractToDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Image\image.zip"), Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Image\"));
-                }
-                catch (Exception)
-                {
-                }
-                string[] img = { @"Image\a.jpg", @"Image\b.jpg", @"Image\c.jpg", @"Image\d.jpg", @"Image\e.jpg", @"Image\f.jpg", @"Image\g.jpg", @"Image\h.jpg" };
-                foreach (var image in img)
-                    images.Add(Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, image)));
-                showImageForm = new ShowImageForm(images, () => { });
-            }
 
             for (int i = 0; i < json.QuestionNumber; i++)
             {
@@ -257,22 +254,17 @@ namespace DBI_PE_Submit_Tool
                 Console.WriteLine(text);
             });
 
-            // Stop time when submit successfully
-            timer?.Stop();
-
-            // Disable all controls.
-            foreach (Control item in Controls)
-                if (item is Button)
-                    item.Enabled = false;
-            foreach (TabPage item in tabBar.TabPages)
-                foreach (Control bth in item.Controls)
-                    bth.Enabled = false;
-            readyToFinishCheckBox.Enabled = false;
             if (result)
             {
+                // Stop time when submit successfully
+                timer?.Stop();
+
                 // Change UI Draft Status UI to submit success
                 draftStatusLabel.Text = "Submit Status: Success";
                 draftStatusLabel.ForeColor = Color.Green;
+
+                // Disable all controls.
+                DisableControls();
             }
             else
             {
@@ -281,7 +273,6 @@ namespace DBI_PE_Submit_Tool
                 draftStatusLabel.ForeColor = Color.Red;
             }
             draftStatusLabel.Refresh();
-
         }
 
         private void FontSize_ValueChanged(object sender, EventArgs e)
@@ -292,7 +283,20 @@ namespace DBI_PE_Submit_Tool
 
         private void ExamContentButton_Click(object sender, EventArgs e)
         {
+            showImageForm = new ShowImageForm(images, () => { });
             showImageForm.Show();
+        }
+
+        private void DisableControls()
+        {
+            // Disable all controls.
+            foreach (Control item in Controls)
+                if (item is Button)
+                    item.Enabled = false;
+            foreach (TabPage item in tabBar.TabPages)
+                foreach (Control bth in item.Controls)
+                    bth.Enabled = false;
+            readyToFinishCheckBox.Enabled = false;
         }
 
         /// <summary>
