@@ -133,7 +133,6 @@
             this.examCodeTextBox.Name = "examCodeTextBox";
             this.examCodeTextBox.Size = new System.Drawing.Size(271, 20);
             this.examCodeTextBox.TabIndex = 16;
-            this.examCodeTextBox.Text = "YourClass";
             // 
             // paperNoTextBox
             // 
@@ -141,7 +140,6 @@
             this.paperNoTextBox.Name = "paperNoTextBox";
             this.paperNoTextBox.Size = new System.Drawing.Size(271, 20);
             this.paperNoTextBox.TabIndex = 17;
-            this.paperNoTextBox.Text = "1";
             // 
             // usernameTextBox
             // 

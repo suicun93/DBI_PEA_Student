@@ -86,10 +86,12 @@ namespace DBI_PE_Submit_Tool
                             client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
 
                             var parameters = new System.Collections.Specialized.NameValueCollection
-                        {
-                            { "username", Username },
-                            { "hashedPassword", Password }
-                        };
+                            {
+                                { "username", Username },
+                                { "hashedPassword", Password },
+                                { "examCode", Examcode },
+                                { "paperNo", PaperNo }
+                            };
 
                             byte[] responseBytes = client.UploadValues(uri, "POST", parameters);
                             string responseBody = System.Text.Encoding.UTF8.GetString(responseBytes);
@@ -99,7 +101,7 @@ namespace DBI_PE_Submit_Tool
                         }
                         catch (Exception e)
                         {
-                            MessageBox.Show("Error!\n" + e.Message);
+                            //MessageBox.Show("Error!\n" + e.Message);
                         }
                     }
                 }

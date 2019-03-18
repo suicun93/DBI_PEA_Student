@@ -46,6 +46,9 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +63,7 @@
     <Compile Include="Common\Constant.cs" />
     <Compile Include="Common\Download.cs" />
     <Compile Include="Common\SecureJsonSerializer.cs" />
+    <Compile Include="Entity\ExamInfo.cs" />
     <Compile Include="Entity\ResponseData.cs" />
     <Compile Include="Model\Submission.cs" />
     <Compile Include="UI\ClientForm.cs">
@@ -125,16 +129,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Image\a.jpg" />
-    <Content Include="Image\b.jpg" />
-    <Content Include="Image\c.jpg" />
-    <Content Include="Image\d.jpg" />
-    <Content Include="Image\e.jpg" />
-    <Content Include="Image\f.jpg" />
-    <Content Include="Image\g.jpg" />
-    <Content Include="Image\h.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

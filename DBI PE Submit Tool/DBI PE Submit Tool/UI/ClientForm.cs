@@ -58,7 +58,7 @@ namespace DBI_PE_Submit_Tool
                 Thread t = new Thread(() =>
                 {
                     string url = Constant.API_URL + "/questions";
-                    //this.images = Download.DownloadQuestions(url, json.Token, examInfo.ExamCode, examInfo.PaperNo);
+                    this.images = Download.DownloadQuestions(url, json.Token, examInfo.ExamCode, examInfo.PaperNo);
                 });
                 t.Start();
 
@@ -86,6 +86,7 @@ namespace DBI_PE_Submit_Tool
 
             int now = (int)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
             remainingTime = json.Exp - now;
+            remainingTime -= 120;
         }
 
         private void Timer_Tick(object sender, EventArgs e)

@@ -16,52 +16,52 @@ namespace DBI_PE_Submit_Tool.Common
     {
         private static string questionImagePath = Environment.CurrentDirectory;
 
-        //public static List<Image> DownloadQuestions(string url, string token, string examCode, string paperNo)
-        //{
-        //    List<Image> images = new List<Image>();
-        //    try
-        //    {
-        //        Uri uri = new Uri(url);
-        //        //string filename = System.IO.Path.GetFileName(uri.LocalPath);
+        public static List<Image> DownloadQuestions(string url, string token, string examCode, string paperNo)
+        {
+            List<Image> images = new List<Image>();
+            try
+            {
+                Uri uri = new Uri(url);
+                //string filename = System.IO.Path.GetFileName(uri.LocalPath);
 
-        //        using (WebClient client = new WebClient())
-        //        {
-        //            client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                using (WebClient client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
 
-        //            var parameters = new System.Collections.Specialized.NameValueCollection
-        //            {
-        //                { "token", token },
-        //                { "examCode", examCode },
-        //                { "paperNo", paperNo }
-        //            };
+                    var parameters = new System.Collections.Specialized.NameValueCollection
+                    {
+                        { "token", token },
+                        { "examCode", examCode },
+                        { "paperNo", paperNo }
+                    };
 
-        //            byte[] buffer = client.UploadValues(uri, parameters);
-        //            using (var stream = new MemoryStream(buffer))
-        //            {
-        //                //string zipPath = Path.Combine(Environment.CurrentDirectory, @"image.zip");
-        //                //var file = File.Create(zipPath);
-        //                //stream.CopyTo(file);
+                    byte[] buffer = client.UploadValues(uri, parameters);
+                    using (var stream = new MemoryStream(buffer))
+                    {
+                        //string zipPath = Path.Combine(Environment.CurrentDirectory, @"image.zip");
+                        //var file = File.Create(zipPath);
+                        //stream.CopyTo(file);
 
-        //                ZipArchive zip = new ZipArchive(stream);
-        //                foreach (ZipArchiveEntry entry in zip.Entries)
-        //                {
-        //                    using (var imgStream = entry.Open())
-        //                    {
-        //                        Image img = Image.FromStream(imgStream);
-        //                        images.Add(img);
-        //                    }
-        //                }
+                        ZipArchive zip = new ZipArchive(stream);
+                        foreach (ZipArchiveEntry entry in zip.Entries)
+                        {
+                            using (var imgStream = entry.Open())
+                            {
+                                Image img = Image.FromStream(imgStream);
+                                images.Add(img);
+                            }
+                        }
 
-        //                buffer = null;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //MessageBox.Show(ex.Message);
-        //    }
-        //    return images;
-        //}
+                        buffer = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
+            return images;
+        }
 
         // Download with POST method, goes with token
         public static void PostDownloadMaterial(string url, string token)
